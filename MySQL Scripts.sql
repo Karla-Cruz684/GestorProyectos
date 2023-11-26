@@ -3,171 +3,360 @@ create database GestorProyectos;
 use GestorProyectos;
 
 -- Tabla Participante = Almacenara todos los participantes existentes en la base
+-- Observacion = Un nombre mas apropiado sera Empleado *CAMBIO PENDIENTE*
 create table Participante(
-	id 			int primary key,
-	nombre 		varchar(40)
+	id 			int primary key auto_increment,
+	nombre 		varchar(40) not null,
+    apellidoM	varchar(20) not null,
+    apellidoP 	varchar(20) not null, 
+    usuario		varchar(20) unique not null,
+    cargo 		set("Participante", "Administrador de Proyecto", "Administrador General") not null
 );
 
 -- Tabla Proyecto = Almacenara todos los proyectos existentes en la base
 create table Proyecto(
-	id 				int primary key,
-	nombre 			varchar(40),
+	id 				int primary key auto_increment,
+	nombre 			varchar(40) not null,
 	objetivo 		varchar(60),
     fecha_inicio	date,
     fecha_fin		date,
-    descripcion		text(120),
+    descripcion		text(200),
     responsable		int,
     foreign key (responsable) references Participante(id)
 );
 
 -- Tabla Tarea = Almacenara todas los tareas existentes en la base
 create table Tarea(
-	id 				int primary key,
-	nombre 			varchar(40),
+	id 				int primary key auto_increment,
+	nombre 			varchar(40) not null,
 	fecha_inicio	date,
     fecha_fin		date,
     estado			set("Pendiente", "En Proceso", "Terminada", "Cancelada"),
     prioridad		set("Baja", "Normal", "Alta", "Urgente"),
-    descripcion		text(120),
+    descripcion		text(200),
     id_proyecto 	int,
     foreign key (id_proyecto) references Proyecto(id)
 );
 
 -- Tabla Tarea_Participante = Almacenara todas las asignaciones de Tarea a Participante existentes en la base
 create table Tarea_Participante(
-	id_tarea			int,
-	id_participante		int,
+	id_tarea			int not null,
+	id_participante		int not null,
     primary key (id_tarea, id_participante),
     foreign key (id_tarea) references Tarea(id),
     foreign key (id_participante) references Participante(id)
 );
 
--- Tabla Proyecto_Tarea = Almacenara todas las pertenencias Tareas a Proyecto existentes en la base
--- Observacion = Un nombre mas apropiado sera Tarea_Proyecto *CAMBIO PENDIENTE*
-create table Proyecto_Tarea(
-	id_proyecto 	int,
-    id_tarea		int,
-    primary key (id_proyecto, id_tarea),
-    foreign key (id_proyecto) references Proyecto(id),
-    foreign key (id_tarea) references Tarea(id)
-);
-
 -- Tabla Tarea_Tarea = Almacenara todas las precedencias entre Tareas existentes en la base
 create table Tarea_Tarea(
-	id_tarea1	int,
-    id_tarea2	int,
+	id_tarea1	int not null,
+    id_tarea2	int not null,
     primary key (id_tarea1, id_tarea2),
     foreign key (id_tarea1) references Tarea(id),
     foreign key (id_tarea2) references Tarea(id)
 );
 
-insert into Participante (id, nombre) values (1, 'Shaylah');
-insert into Participante (id, nombre) values (2, 'Louise');
-insert into Participante (id, nombre) values (3, 'Catriona');
-insert into Participante (id, nombre) values (4, 'Devondra');
-insert into Participante (id, nombre) values (5, 'Addy');
-insert into Participante (id, nombre) values (6, 'Letti');
-insert into Participante (id, nombre) values (7, 'Lucia');
-insert into Participante (id, nombre) values (8, 'Hurleigh');
-insert into Participante (id, nombre) values (9, 'Aubrie');
-insert into Participante (id, nombre) values (10, 'Jonathon');
-insert into Participante (id, nombre) values (11, 'Bondy');
-insert into Participante (id, nombre) values (12, 'Dewie');
-insert into Participante (id, nombre) values (13, 'Hewitt');
-insert into Participante (id, nombre) values (14, 'Desiri');
-insert into Participante (id, nombre) values (15, 'Hattie');
-insert into Participante (id, nombre) values (16, 'Mollie');
-insert into Participante (id, nombre) values (17, 'Erl');
-insert into Participante (id, nombre) values (18, 'Johnny');
-insert into Participante (id, nombre) values (19, 'Thedric');
-insert into Participante (id, nombre) values (20, 'Egbert');
-insert into Participante (id, nombre) values (21, 'Sonnie');
-insert into Participante (id, nombre) values (22, 'Matty');
-insert into Participante (id, nombre) values (23, 'Bartolemo');
-insert into Participante (id, nombre) values (24, 'Em');
-insert into Participante (id, nombre) values (25, 'Charmane');
-insert into Participante (id, nombre) values (26, 'Tedra');
-insert into Participante (id, nombre) values (27, 'Linette');
-insert into Participante (id, nombre) values (28, 'Kelley');
-insert into Participante (id, nombre) values (29, 'Karrah');
-insert into Participante (id, nombre) values (30, 'Elyse');
-insert into Participante (id, nombre) values (31, 'Hilario');
-insert into Participante (id, nombre) values (32, 'Merralee');
-insert into Participante (id, nombre) values (33, 'Dreddy');
-insert into Participante (id, nombre) values (34, 'Saree');
-insert into Participante (id, nombre) values (35, 'Lurline');
-insert into Participante (id, nombre) values (36, 'Nani');
-insert into Participante (id, nombre) values (37, 'Teddie');
-insert into Participante (id, nombre) values (38, 'Langsdon');
-insert into Participante (id, nombre) values (39, 'Arlan');
-insert into Participante (id, nombre) values (40, 'Phip');
-insert into Participante (id, nombre) values (41, 'Melvyn');
-insert into Participante (id, nombre) values (42, 'Lothaire');
-insert into Participante (id, nombre) values (43, 'Dedra');
-insert into Participante (id, nombre) values (44, 'Haywood');
-insert into Participante (id, nombre) values (45, 'Margi');
-insert into Participante (id, nombre) values (46, 'Adrian');
-insert into Participante (id, nombre) values (47, 'Rudolfo');
-insert into Participante (id, nombre) values (48, 'Mora');
-insert into Participante (id, nombre) values (49, 'Monique');
-insert into Participante (id, nombre) values (50, 'Oswell');
-insert into Participante (id, nombre) values (51, 'Karlee');
-insert into Participante (id, nombre) values (52, 'Jordanna');
-insert into Participante (id, nombre) values (53, 'Cole');
-insert into Participante (id, nombre) values (54, 'Marissa');
-insert into Participante (id, nombre) values (55, 'Ximenez');
-insert into Participante (id, nombre) values (56, 'Julina');
-insert into Participante (id, nombre) values (57, 'Saw');
-insert into Participante (id, nombre) values (58, 'Maureene');
-insert into Participante (id, nombre) values (59, 'Nickie');
-insert into Participante (id, nombre) values (60, 'Renaud');
-insert into Participante (id, nombre) values (61, 'Laetitia');
-insert into Participante (id, nombre) values (62, 'Shantee');
-insert into Participante (id, nombre) values (63, 'Isidro');
-insert into Participante (id, nombre) values (64, 'Vitoria');
-insert into Participante (id, nombre) values (65, 'Cliff');
-insert into Participante (id, nombre) values (66, 'Quintus');
-insert into Participante (id, nombre) values (67, 'Freddie');
-insert into Participante (id, nombre) values (68, 'Jacquette');
-insert into Participante (id, nombre) values (69, 'Norah');
-insert into Participante (id, nombre) values (70, 'Isidro');
-insert into Participante (id, nombre) values (71, 'Bernetta');
-insert into Participante (id, nombre) values (72, 'Egan');
-insert into Participante (id, nombre) values (73, 'Fabe');
-insert into Participante (id, nombre) values (74, 'Ertha');
-insert into Participante (id, nombre) values (75, 'Cherilynn');
-insert into Participante (id, nombre) values (76, 'Odelia');
-insert into Participante (id, nombre) values (77, 'Violet');
-insert into Participante (id, nombre) values (78, 'Valida');
-insert into Participante (id, nombre) values (79, 'Thekla');
-insert into Participante (id, nombre) values (80, 'Fitzgerald');
-insert into Participante (id, nombre) values (81, 'Hannah');
-insert into Participante (id, nombre) values (82, 'Pammi');
-insert into Participante (id, nombre) values (83, 'Stace');
-insert into Participante (id, nombre) values (84, 'Staffard');
-insert into Participante (id, nombre) values (85, 'Cy');
-insert into Participante (id, nombre) values (86, 'Gwenore');
-insert into Participante (id, nombre) values (87, 'Mariana');
-insert into Participante (id, nombre) values (88, 'Nappy');
-insert into Participante (id, nombre) values (89, 'Tillie');
-insert into Participante (id, nombre) values (90, 'Harrietta');
-insert into Participante (id, nombre) values (91, 'Roddy');
-insert into Participante (id, nombre) values (92, 'Avis');
-insert into Participante (id, nombre) values (93, 'June');
-insert into Participante (id, nombre) values (94, 'Venita');
-insert into Participante (id, nombre) values (95, 'Noah');
-insert into Participante (id, nombre) values (96, 'Dorisa');
-insert into Participante (id, nombre) values (97, 'Prentiss');
-insert into Participante (id, nombre) values (98, 'Priscilla');
-insert into Participante (id, nombre) values (99, 'Sydelle');
-insert into Participante (id, nombre) values (100, 'Gayler');
+/* --------------Procesos de permisos--------------------------------------------------------------- */
+
+delimiter //
+create procedure permisos (in _usuario varchar(20), in _permiso set ('Participante','Administrador de Proyecto','Administrador General'))
+begin
+case 
+when _permiso = 'Participante' then
+grant execute on procedure participantes to _usuario@'%';
+grant execute on procedure tareas to _usuario@'%';
+grant execute on procedure proyectos to _usuario@'%';
+
+when _permiso = 'Administrador de Proyecto' then
+grant execute on procedure participantes to _usuario@'%';
+grant execute on procedure tareas to _usuario@'%';
+grant execute on procedure proyectos to _usuario@'%';
+grant execute on procedure altaTarea to _usuario@'%';
+grant execute on procedure asignarTarea to _usuario@'%';
+grant execute on procedure asignarPrecedenciaTarea to _usuario@'%';
+grant execute on procedure tareaActualizacion to _usuario@'%';
+grant execute on procedure tareaBorrar to _usuario@'%';
+
+when _permiso = 'Administrador General' then
+grant execute on procedure participantes to _usuario@'%';
+grant execute on procedure tareas to _usuario@'%';
+grant execute on procedure proyectos to _usuario@'%';
+grant execute on procedure altaParticipante to _usuario@'%';
+grant execute on procedure altaTarea to _usuario@'%';
+grant execute on procedure altaProyecto to _usuario@'%';
+grant execute on procedure asignarTarea to _usuario@'%';
+grant execute on procedure asignarPrecedenciaTarea to _usuario@'%';
+grant execute on procedure tareaActualizacion to _usuario@'%';
+grant execute on procedure proyectoActualizacion to _usuario@'%';
+grant execute on procedure tareaBorrar to _usuario@'%';
+grant execute on procedure proyectoBorrar to _usuario@'%';
+end case;
+
+end //
+
+/* --------------Procesos de Creacion de registros--------------------------------------------------------------- */
+
+delimiter //
+create procedure altaParticipante (in _nombre varchar(40), in _apellidoP varchar(20), in _apellidoM varchar(20), in _usuario varchar(20), in _cargo set("Participante", "Administrador de Proyecto", "Administrador General"))
+begin
+insert into Participante (nombre, apellidoP, apellidoM, usuario, cargo) values (_nombre, _apellidoP, _apellidoM, _usuario, _cargo);
+create user _usuario@'%';
+call permisos(_usuario, _cargo);
+end //
+
+delimiter //
+create procedure altaProyecto (in _nombre varchar(40), in _objetivo varchar(60), in _fecha_inicio date,
+								in _fecha_fin date, in _descripcion text(120), in _responsable int)
+begin
+insert into Proyecto (nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) 
+values (_nombre, _objetivo, _fecha_inicio, _fecha_fin, _descripcion, _responsable);
+end //
+
+delimiter //
+create procedure altaTarea (in _nombre varchar(40), _fecha_inicio date, _fecha_fin date, 
+							in _estado set("Pendiente", "En Proceso", "Terminada", "Cancelada"),
+                            in _prioridad set("Baja", "Normal", "Alta", "Urgente"),
+							in _descripcion text(120), _id_proyecto int)
+begin
+insert into Tarea (nombre, fecha_inicio, fecha_fin, estado, prioridad, descripcion, id_proyecto) 
+values (_nombre, _fecha_inicio, _fecha_fin, _estado, _prioridad, _descripcion, _id_proyecto);
+end //
+
+delimiter //
+create procedure asignarTarea (in _id_tarea int, in _id_participante int)
+begin
+insert into Tarea_Participante (id_tarea, id_participante) 
+values (_id_tarea, _id_participante);
+end //
+
+delimiter //
+create procedure asignarPrecedenciaTarea (in _id_tarea1 int, in _id_tarea2 int)
+begin
+insert into Tarea_Tarea (id_tarea1, _id_tarea2) 
+values (_id_tarea1, _id_tarea2);
+end //
+
+/* --------------Procesos de Lectura de registros--------------------------------------------------------------- */
+
+delimiter //
+create procedure participantes ()
+begin
+declare sub json;
+set sub = (select id, cargo from Participante where usuario = substring(current_user(), 1, locate('@', current_user()) - 1));
+case 
+
+when sub.cargo = "Participante" then
+select p.nombre, p.apellidoP, p.apellidoM, t.id_tarea 
+from participante p, tarea_participante t, (select id_tarea t from tarea_participante p where sub.id = id_participante) tr 
+where p.id = t.id_participante and tr.t = t.id_tarea;
+
+when sub.cargo = "Administrador de Proyecto" then /* cambio pendiente*/
+select pr.nombre, t.nombre, p2.* from participante p 
+inner join proyecto pr on p.id = pr.responsable
+inner join tarea t on t.id_proyecto = pr.id
+inner join tarea_participante tp on tp.id_tarea = t.id
+inner join participante p2 on p2.id = tp.id_participante
+where p.id = sub.id; 
+
+when sub.cargo = "Administrador General" then
+select * from participante;
+
+end case;
+end //
+
+delimiter //
+create procedure proyectos ()
+begin
+declare sub json;
+set sub = (select id, cargo from Participante where usuario = substring(current_user(), 1, locate('@', current_user()) - 1));
+case 
+
+when sub.cargo = "Participante" then
+select p.* from proyecto p
+inner join tarea t on t.id_proyecto = p.id
+inner join tarea_participante tp on tp.id_tarea = t.id
+where tp.id_participante = sub.id;
+
+when sub.cargo = "Administrador de Proyecto" then 
+select p.* from proyecto p, participante pr
+where p.responsable = pr.id 
+union 
+select p.* from proyecto p
+inner join tarea t on t.id_proyecto = p.id
+inner join tarea_participante tp on tp.id_tarea = t.id
+where tp.id_participante = sub.id;
+
+
+when sub.cargo = "Administrador General" then
+select * from proyecto;
+
+end case;
+end //
+
+delimiter //
+create procedure tareas ()
+begin
+declare sub json;
+set sub = (select id, cargo from Participante where usuario = substring(current_user(), 1, locate('@', current_user()) - 1));
+case 
+
+when sub.cargo = "Participante" then
+select p.nombre, t.nombre, t.fecha_inicio, t.fecha_fin, t.estado, t.prioridad, t.descripcion
+from tarea t inner join proyecto p on t.id_proyecto = p.id
+inner join tarea_participante tp on t.id = tp.id_tarea
+where tp.id_participante = sub.id;
+
+when sub.cargo = "Administrador de Proyecto" then /* cambio pendiente*/
+select * from tarea t
+inner join proyecto p on t.id_proyecto = p.id
+where p.responsable = sub.id;
+
+when sub.cargo = "Administrador General" then
+select * from tarea;
+end case;
+
+end //
+
+/* --------------Procesos de actualizacion de registros--------------------------------------------------------------- */
+
+delimiter //
+create procedure proyectoActualizacion (in _id int, in _nombre varchar(40), in _objetivo varchar(60), in _fecha_inicio date,
+										in _fecha_fin date, in _descripcion text(120), in _responsable int)
+begin
+update tarea set nombre = _nombre, objetivo = _objetivo, fecha_inicio = _fecha_inicio, fecha_fin = _fecha_fin, 
+				descripcion = _descripcion, responsable = _responsable where id = _id;
+end //
+
+delimiter //
+create procedure tareaActualizacion (in _id int, in _nombre varchar(40), in _fecha_inicio date, in _fecha_fin date, 
+									in _estado set("Pendiente", "En Proceso", "Terminada", "Cancelada"), 
+                                    in _prioridad set("Baja", "Normal", "Alta", "Urgente"), in _descripcion text(120))
+begin
+update tarea set nombre = _nombre, fecha_inicio = _fecha_inicio, fecha_fin = _fecha_fin, estado = _estado, 
+							prioridad = _prioridad, descripcion = _descripcion where id = _id;
+end //
+
+/* --------------Procesos de borrado de registros--------------------------------------------------------------- */
+
+delimiter //
+create procedure tareaBorrar (in _id int)
+begin
+delete from tarea where id = _id;
+end //
+
+delimiter //
+create procedure proyectoBorrar (in _id int)
+begin
+delete from proyecto where id = _id;
+end //
+
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (1, 'Rafaellle', 'Ogg', 'Eacott', 'reacott0', 'Administrador General');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (2, 'Alyce', 'Maiden', 'Manass', 'amanass1', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (3, 'Aliza', 'Gleed', 'Cortez', 'acortez2', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (4, 'Mildrid', 'Bootton', 'Wilstead', 'mwilstead3', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (5, 'Marcia', 'Spurden', 'Ogilvie', 'mogilvie4', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (6, 'Jody', 'Gloucester', 'Celloni', 'jcelloni5', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (7, 'Missie', 'Romanet', 'Stoeckle', 'mstoeckle6', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (8, 'Piper', 'Reimer', 'Stode', 'pstode7', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (9, 'Tiphany', 'Gounet', 'Charlton', 'tcharlton8', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (10, 'Trumaine', 'Proctor', 'Rowesby', 'trowesby9', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (11, 'Olly', 'Whitnell', 'Cassells', 'ocassellsa', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (12, 'Kessia', 'Sowray', 'Giblin', 'kgiblinb', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (13, 'Charlean', 'Nockells', 'Paramor', 'cparamorc', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (14, 'Abeu', 'Chislett', 'Leggate', 'aleggated', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (15, 'Nikki', 'Rickell', 'Bagworth', 'nbagworthe', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (16, 'Libbie', 'Brommage', 'Hallgath', 'lhallgathf', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (17, 'Gordan', 'Stainton - Skinn', 'Nelles', 'gnellesg', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (18, 'Nicolais', 'Millmoe', 'Amoss', 'namossh', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (19, 'Melva', 'Crackett', 'Doles', 'mdolesi', 'Administrador de Proyecto');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (20, 'Freddi', 'Gadault', 'Sayse', 'fsaysej', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (21, 'Lilia', 'Daice', 'Durtnel', 'ldurtnelk', 'Administrador de Proyecto');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (22, 'Juli', 'Sutherden', 'Hoffmann', 'jhoffmannl', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (23, 'Brent', 'Breache', 'Queree', 'bquereem', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (24, 'Genia', 'Neighbour', 'Bibby', 'gbibbyn', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (25, 'Tuck', 'Gilmore', 'Bosden', 'tbosdeno', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (26, 'Abigael', 'Husselbee', 'Berthon', 'aberthonp', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (27, 'Beverlie', 'Rettie', 'Viles', 'bvilesq', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (28, 'Maxine', 'Kybbye', 'Surgener', 'msurgenerr', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (29, 'Morganica', 'Fitzpayn', 'Gawke', 'mgawkes', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (30, 'Lizbeth', 'Formie', 'Skewes', 'lskewest', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (31, 'Murdock', 'Loakes', 'Kippins', 'mkippinsu', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (32, 'Erma', 'Dafydd', 'MacWilliam', 'emacwilliamv', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (33, 'Pauletta', 'Brody', 'Schwieso', 'pschwiesow', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (34, 'Kirby', 'Kirk', 'Alcock', 'kalcockx', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (35, 'Aimil', 'De Brett', 'Loudwell', 'aloudwelly', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (36, 'Reggie', 'Hinzer', 'Torbett', 'rtorbettz', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (37, 'Candice', 'Brodeur', 'Karpfen', 'ckarpfen10', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (38, 'Berny', 'Bloomfield', 'Dixey', 'bdixey11', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (39, 'Deva', 'Nicholson', 'Stanett', 'dstanett12', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (40, 'Meade', 'Santos', 'Pitrollo', 'mpitrollo13', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (41, 'Mariam', 'Josebury', 'Jukubczak', 'mjukubczak14', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (42, 'Mikey', 'Yardy', 'Haseman', 'mhaseman15', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (43, 'Correy', 'Beechcraft', 'Berndtsson', 'cberndtsson16', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (44, 'Collen', 'Learmont', 'Oakhill', 'coakhill17', 'Administrador de Proyecto');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (45, 'Loise', 'Hasley', 'Danson', 'ldanson18', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (46, 'Ansel', 'McLaren', 'Conibeer', 'aconibeer19', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (47, 'Martino', 'Jeanesson', 'Cater', 'mcater1a', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (48, 'Way', 'Kleiser', 'Casolla', 'wcasolla1b', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (49, 'Anthony', 'Mussilli', 'Lesly', 'alesly1c', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (50, 'Flo', 'Odegaard', 'Robathon', 'frobathon1d', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (51, 'Kerri', 'Snoding', 'Jozsa', 'kjozsa1e', 'Administrador de Proyecto');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (52, 'Inna', 'Bevington', 'Edgeley', 'iedgeley1f', 'Administrador de Proyecto');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (53, 'Renae', 'Chanter', 'Goodin', 'rgoodin1g', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (54, 'Marion', 'Noulton', 'Brack', 'mbrack1h', 'Administrador de Proyecto');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (55, 'Orelle', 'Gresham', 'Fitzsymonds', 'ofitzsymonds1i', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (56, 'Corrianne', 'Little', 'Bracchi', 'cbracchi1j', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (57, 'Karlene', 'Henken', 'Fawthrop', 'kfawthrop1k', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (58, 'Boothe', 'Meech', 'Raddin', 'braddin1l', 'Administrador de Proyecto');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (59, 'Giralda', 'Perschke', 'Buncom', 'gbuncom1m', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (60, 'Ralina', 'Lightwing', 'Hedney', 'rhedney1n', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (61, 'Lauri', 'Tonkinson', 'Licciardo', 'llicciardo1o', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (62, 'Kenna', 'Swyre', 'Copeman', 'kcopeman1p', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (63, 'Reginauld', 'Broe', 'Ziehm', 'rziehm1q', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (64, 'Tonye', 'Lympenie', 'Polglase', 'tpolglase1r', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (65, 'Craggie', 'Braisher', 'Rootes', 'crootes1s', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (66, 'Gilemette', 'Renwick', 'Moxstead', 'gmoxstead1t', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (67, 'Brandy', 'Backshill', 'Rawlin', 'brawlin1u', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (68, 'Kathryn', 'Ballay', 'Minter', 'kminter1v', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (69, 'Ardisj', 'Chestle', 'Wragg', 'awragg1w', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (70, 'Samantha', 'Darrigoe', 'Burnie', 'sburnie1x', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (71, 'Cynthy', 'Wawer', 'Broggetti', 'cbroggetti1y', 'Administrador de Proyecto');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (72, 'Layne', 'Luckes', 'Semark', 'lsemark1z', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (73, 'Jase', 'Brenston', 'Adamthwaite', 'jadamthwaite20', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (74, 'Marley', 'Ascrofte', 'Goodband', 'mgoodband21', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (75, 'Adiana', 'Surgen', 'Dewdney', 'adewdney22', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (76, 'Florence', 'Flaherty', 'Colquit', 'fcolquit23', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (77, 'Barbi', 'Dreng', 'Gantzman', 'bgantzman24', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (78, 'Corie', 'Ladbrook', 'Pavlik', 'cpavlik25', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (79, 'Giraldo', 'Mullins', 'Retallack', 'gretallack26', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (80, 'Hedy', 'Dennick', 'Jansens', 'hjansens27', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (81, 'Abigale', 'Latham', 'Toghill', 'atoghill28', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (82, 'Ottilie', 'Ethridge', 'Bengal', 'obengal29', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (83, 'Etan', 'Baldrick', 'Phonix', 'ephonix2a', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (84, 'Gabby', 'Acom', 'Baggalley', 'gbaggalley2b', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (85, 'Tracee', 'Poytres', 'Twiggs', 'ttwiggs2c', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (86, 'Myca', 'Perry', 'Esselen', 'messelen2d', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (87, 'Pascale', 'Dillintone', 'Scroggs', 'pscroggs2e', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (88, 'Glyn', 'Motion', 'Guild', 'gguild2f', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (89, 'Joyann', 'MacTeggart', 'Lonie', 'jlonie2g', 'Administrador de Proyecto');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (90, 'Kalil', 'Spradbrow', 'Chirm', 'kchirm2h', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (91, 'Efrem', 'Partleton', 'Feitosa', 'efeitosa2i', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (92, 'Son', 'Buss', 'Chazelle', 'schazelle2j', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (93, 'Dido', 'Yanin', 'Breslin', 'dbreslin2k', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (94, 'Tiler', 'Willcocks', 'Ganniclifft', 'tganniclifft2l', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (95, 'Arnie', 'Hamlington', 'Whellans', 'awhellans2m', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (96, 'Cointon', 'Valentetti', 'Walewski', 'cwalewski2n', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (97, 'Link', 'Wadman', 'Orth', 'lorth2o', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (98, 'Manolo', 'Fauning', 'Lymer', 'mlymer2p', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (99, 'Tina', 'Laird', 'Lillico', 'tlillico2q', 'Participante');
+insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (100, 'Brittan', 'Alennikov', 'McAusland', 'bmcausland2r', 'Participante');
 
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (1, 'Ronstring', 'adipiscing lorem vitae', '2023-05-09', '2023-11-28', null, 81);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (2, 'Voyatouch', 'non velit nec', '2023-06-13', '2024-04-01', 'aliquet maecenas leo odio condimentum id luctus nec molestie sed', 81);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (3, 'Cardguard', 'primis in faucibus', '2023-04-03', '2024-08-23', 'ut volutpat sapien arcu sed augue aliquam erat volutpat in', 45);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (4, 'Fixflex', 'nulla eget eros', '2023-09-28', '2024-03-05', 'ut blandit non interdum in ante vestibulum ante ipsum primis', 99);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (5, 'Tempsoft', 'molestie lorem quisque', '2023-04-18', '2023-11-30', 'ullamcorper purus sit amet nulla quisque arcu libero rutrum ac', 79);
-insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (6, 'Cardguard', 'vulputate nonummy maecenas', '2023-01-31', '2024-02-11', 'tincidunt nulla mollis molestie lorem quisque ut erat curabitur gravida', 24);
+insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (6, 'Cardguard2', 'vulputate nonummy maecenas', '2023-01-31', '2024-02-11', 'tincidunt nulla mollis molestie lorem quisque ut erat curabitur gravida', 24);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (7, 'Prodder', 'quam sollicitudin vitae', '2023-03-21', '2024-05-02', null, 39);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (8, 'Greenlam', 'vestibulum proin eu', '2023-09-01', '2024-10-30', 'sit amet nulla quisque arcu libero rutrum ac lobortis vel', 88);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (9, 'Alphazap', 'vestibulum sagittis sapien', '2023-04-22', '2024-01-08', 'ut erat curabitur gravida nisi at nibh in hac habitasse', 36);
@@ -175,53 +364,53 @@ insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (11, 'Sonair', 'vestibulum ac est', '2023-05-04', '2024-10-30', 'dapibus nulla suscipit ligula in lacus curabitur at ipsum ac', 53);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (12, 'Toughjoyfax', 'magna at nunc', '2023-02-11', '2024-01-31', 'ipsum primis in faucibus orci luctus et ultrices posuere cubilia', 33);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (13, 'Overhold', 'vulputate nonummy maecenas', '2023-06-21', '2024-01-13', 'curae mauris viverra diam vitae quam suspendisse potenti nullam porttitor', 82);
-insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (14, 'Tresom', 'at nulla suspendisse', '2023-08-26', '2024-01-16', 'molestie nibh in lectus pellentesque at nulla suspendisse potenti cras', 11);
-insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (15, 'Voyatouch', 'sapien varius ut', '2022-12-23', '2024-10-15', 'eu mi nulla ac enim in tempor turpis nec euismod', 76);
+insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (14, 'Tresom2', 'at nulla suspendisse', '2023-08-26', '2024-01-16', 'molestie nibh in lectus pellentesque at nulla suspendisse potenti cras', 11);
+insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (15, 'Voyatouch2', 'sapien varius ut', '2022-12-23', '2024-10-15', 'eu mi nulla ac enim in tempor turpis nec euismod', 76);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (16, 'Lotstring', 'posuere felis sed', '2023-03-13', '2024-10-16', 'eros vestibulum ac est lacinia nisi venenatis tristique fusce congue', 55);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (17, 'Ventosanzap', 'magna ac consequat', '2022-12-07', '2023-12-02', 'habitasse platea dictumst etiam faucibus cursus urna ut tellus nulla', 33);
-insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (18, 'Sonair', 'sagittis dui vel', '2022-12-24', '2024-08-23', null, 22);
-insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (19, 'Overhold', 'nec nisi volutpat', '2023-08-14', '2024-09-15', 'lectus in quam fringilla rhoncus mauris enim leo rhoncus sed', 63);
+insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (18, 'Sonair2', 'sagittis dui vel', '2022-12-24', '2024-08-23', null, 22);
+insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (19, 'Overhold2', 'nec nisi volutpat', '2023-08-14', '2024-09-15', 'lectus in quam fringilla rhoncus mauris enim leo rhoncus sed', 63);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (20, 'Pannier', 'sed augue aliquam', '2023-11-04', '2024-04-04', 'sapien a libero nam dui proin leo odio porttitor id', 12);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (21, 'Namfix', 'ut mauris eget', '2022-11-20', '2024-09-16', 'pede malesuada in imperdiet et commodo vulputate justo in blandit', 5);
-insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (22, 'Pannier', 'nam nulla integer', '2023-03-06', '2024-05-28', 'in quam fringilla rhoncus mauris enim leo rhoncus sed vestibulum', 59);
+insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (22, 'Pannier2', 'nam nulla integer', '2023-03-06', '2024-05-28', 'in quam fringilla rhoncus mauris enim leo rhoncus sed vestibulum', 59);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (23, 'Holdlamis', 'commodo placerat praesent', '2022-12-02', '2024-06-15', 'pede posuere nonummy integer non velit donec diam neque vestibulum', 82);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (24, 'Zontrax', 'et eros vestibulum', '2023-03-11', '2023-11-28', 'nam dui proin leo odio porttitor id consequat in consequat', 18);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (25, 'Viva', 'blandit nam nulla', '2022-11-27', '2024-03-25', 'hac habitasse platea dictumst aliquam augue quam sollicitudin vitae consectetuer', 10);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (26, 'Regrant', 'nulla dapibus dolor', '2023-03-19', '2024-09-18', 'in libero ut massa volutpat convallis morbi odio odio elementum', 80);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (27, 'Redhold', 'donec dapibus duis', '2023-02-03', '2024-06-05', 'lacus at turpis donec posuere metus vitae ipsum aliquam non', 81);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (28, 'Rank', 'enim sit amet', '2023-10-30', '2024-03-06', 'maecenas tristique est et tempus semper est quam pharetra magna', 43);
-insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (29, 'Viva', 'pede venenatis non', '2023-06-02', '2024-04-16', 'luctus cum sociis natoque penatibus et magnis dis parturient montes', 84);
+insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (29, 'Viva2', 'pede venenatis non', '2023-06-02', '2024-04-16', 'luctus cum sociis natoque penatibus et magnis dis parturient montes', 84);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (30, 'Stim', 'nam dui proin', '2023-09-03', '2024-08-15', 'tempus sit amet sem fusce consequat nulla nisl nunc nisl', 64);
-insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (31, 'Sonair', 'vestibulum ante ipsum', '2022-11-18', '2023-11-19', 'cursus vestibulum proin eu mi nulla ac enim in tempor', 51);
-insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (32, 'Cardguard', 'lacinia nisi venenatis', '2023-11-03', '2024-10-28', 'in hac habitasse platea dictumst morbi vestibulum velit id pretium', 33);
+insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (31, 'Sonair3', 'vestibulum ante ipsum', '2022-11-18', '2023-11-19', 'cursus vestibulum proin eu mi nulla ac enim in tempor', 51);
+insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (32, 'Cardguard3', 'lacinia nisi venenatis', '2023-11-03', '2024-10-28', 'in hac habitasse platea dictumst morbi vestibulum velit id pretium', 33);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (33, 'Keylex', 'massa id lobortis', '2023-07-20', '2024-07-14', 'faucibus orci luctus et ultrices posuere cubilia curae duis faucibus', 25);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (34, 'Solarbreeze', 'penatibus et magnis', '2023-02-27', '2024-06-16', null, 2);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (35, 'Tampflex', 'justo pellentesque viverra', '2023-09-10', '2023-12-19', 'platea dictumst etiam faucibus cursus urna ut tellus nulla ut', 42);
-insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (36, 'Greenlam', 'cursus vestibulum proin', '2023-08-13', '2024-10-31', 'in leo maecenas pulvinar lobortis est phasellus sit amet erat', 36);
-insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (37, 'Greenlam', 'in faucibus orci', '2023-05-17', '2024-11-05', null, 75);
+insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (36, 'Greenlam2', 'cursus vestibulum proin', '2023-08-13', '2024-10-31', 'in leo maecenas pulvinar lobortis est phasellus sit amet erat', 36);
+insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (37, 'Greenlam3', 'in faucibus orci', '2023-05-17', '2024-11-05', null, 75);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (38, 'Stronghold', 'ut nunc vestibulum', '2023-08-07', '2024-11-08', 'maecenas tristique est et tempus semper est quam pharetra magna', 51);
-insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (39, 'Solarbreeze', 'nullam molestie nibh', '2023-06-21', '2024-04-14', 'quis augue luctus tincidunt nulla mollis molestie lorem quisque ut', 18);
+insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (39, 'Solarbreeze2', 'nullam molestie nibh', '2023-06-21', '2024-04-14', 'quis augue luctus tincidunt nulla mollis molestie lorem quisque ut', 18);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (40, 'Mat Lam Tam', 'nulla tempus vivamus', '2023-06-21', '2023-12-18', 'porta volutpat erat quisque erat eros viverra eget congue eget', 22);
-insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (41, 'Redhold', 'ut dolor morbi', '2023-03-27', '2024-09-10', 'sed tincidunt eu felis fusce posuere felis sed lacus morbi', 51);
-insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (42, 'Sonair', 'in imperdiet et', '2023-06-15', '2024-09-22', 'lorem ipsum dolor sit amet consectetuer adipiscing elit proin risus', 59);
+insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (41, 'Redhold2', 'ut dolor morbi', '2023-03-27', '2024-09-10', 'sed tincidunt eu felis fusce posuere felis sed lacus morbi', 51);
+insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (42, 'Sonair4', 'in imperdiet et', '2023-06-15', '2024-09-22', 'lorem ipsum dolor sit amet consectetuer adipiscing elit proin risus', 59);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (43, 'Quo Lux', 'sed justo pellentesque', '2023-05-23', '2024-11-01', 'est quam pharetra magna ac consequat metus sapien ut nunc', 18);
-insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (44, 'Keylex', 'in purus eu', '2023-08-21', '2024-03-15', null, 23);
+insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (44, 'Keylex2', 'in purus eu', '2023-08-21', '2024-03-15', null, 23);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (45, 'Latlux', 'ut ultrices vel', '2023-07-14', '2024-06-01', 'ultrices aliquet maecenas leo odio condimentum id luctus nec molestie', 15);
-insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (46, 'Rank', 'vel accumsan tellus', '2023-09-10', '2024-01-03', 'at dolor quis odio consequat varius integer ac leo pellentesque', 9);
-insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (47, 'Viva', 'quam nec dui', '2023-07-29', '2023-12-07', 'in leo maecenas pulvinar lobortis est phasellus sit amet erat', 49);
+insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (46, 'Rank2', 'vel accumsan tellus', '2023-09-10', '2024-01-03', 'at dolor quis odio consequat varius integer ac leo pellentesque', 9);
+insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (47, 'Viva3', 'quam nec dui', '2023-07-29', '2023-12-07', 'in leo maecenas pulvinar lobortis est phasellus sit amet erat', 49);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (48, 'Zamit', 'justo pellentesque viverra', '2023-08-02', '2024-09-28', 'adipiscing elit proin interdum mauris non ligula pellentesque ultrices phasellus', 28);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (49, 'Gembucket', 'vestibulum eget vulputate', '2023-04-04', '2024-02-10', 'volutpat dui maecenas tristique est et tempus semper est quam', 56);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (50, 'Sonsing', 'quam turpis adipiscing', '2023-04-01', '2024-06-11', 'ligula nec sem duis aliquam convallis nunc proin at turpis', 64);
-insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (51, 'Keylex', 'in est risus', '2023-02-04', '2024-02-03', 'metus vitae ipsum aliquam non mauris morbi non lectus aliquam', 15);
-insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (52, 'Prodder', 'amet justo morbi', '2023-06-06', '2024-02-25', 'eget semper rutrum nulla nunc purus phasellus in felis donec', 7);
+insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (51, 'Keylex3', 'in est risus', '2023-02-04', '2024-02-03', 'metus vitae ipsum aliquam non mauris morbi non lectus aliquam', 15);
+insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (52, 'Prodder2', 'amet justo morbi', '2023-06-06', '2024-02-25', 'eget semper rutrum nulla nunc purus phasellus in felis donec', 7);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (53, 'Wrapsafe', 'mauris lacinia sapien', '2023-05-05', '2023-11-27', 'in sagittis dui vel nisl duis ac nibh fusce lacus', 78);
-insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (54, 'Tampflex', 'curae duis faucibus', '2023-02-08', '2024-02-13', null, 34);
-insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (55, 'Voyatouch', 'felis donec semper', '2023-06-27', '2024-04-22', 'felis ut at dolor quis odio consequat varius integer ac', 68);
-insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (56, 'Fixflex', 'ipsum primis in', '2023-10-06', '2024-02-07', 'eu mi nulla ac enim in tempor turpis nec euismod', 47);
+insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (54, 'Tampflex2', 'curae duis faucibus', '2023-02-08', '2024-02-13', null, 34);
+insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (55, 'Voyatouch3', 'felis donec semper', '2023-06-27', '2024-04-22', 'felis ut at dolor quis odio consequat varius integer ac', 68);
+insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (56, 'Fixflex2', 'ipsum primis in', '2023-10-06', '2024-02-07', 'eu mi nulla ac enim in tempor turpis nec euismod', 47);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (57, 'Cookley', 'magnis dis parturient', '2022-11-16', '2024-07-12', 'cubilia curae nulla dapibus dolor vel est donec odio justo', 83);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (58, 'Bigtax', 'ipsum primis in', '2023-05-01', '2024-05-30', 'turpis sed ante vivamus tortor duis mattis egestas metus aenean', 44);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (59, 'Fixflex', 'potenti nullam porttitor', '2023-04-27', '2024-08-24', null, 54);
-insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (60, 'Sonair', 'vehicula condimentum curabitur', '2023-01-19', '2024-01-16', 'nulla justo aliquam quis turpis eget elit sodales scelerisque mauris', 78);
+insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (60, 'Sonair5', 'vehicula condimentum curabitur', '2023-01-19', '2024-01-16', 'nulla justo aliquam quis turpis eget elit sodales scelerisque mauris', 78);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (61, 'Konklux', 'ligula nec sem', '2023-06-14', '2024-08-05', 'erat vestibulum sed magna at nunc commodo placerat praesent blandit', 54);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (62, 'Tempsoft', 'orci luctus et', '2023-08-29', '2024-08-30', 'risus semper porta volutpat quam pede lobortis ligula sit amet', 7);
 insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) values (63, 'Lotlux', 'bibendum morbi non', '2022-12-21', '2024-04-29', 'diam erat fermentum justo nec condimentum neque sapien placerat ante', 21);
@@ -465,107 +654,6 @@ insert into Tarea_Participante (id_tarea, id_participante) values (67, 3);
 insert into Tarea_Participante (id_tarea, id_participante) values (69, 48);
 insert into Tarea_Participante (id_tarea, id_participante) values (54, 84);
 
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (63, 14);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (86, 67);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (15, 5);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (20, 62);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (100, 37);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (45, 3);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (8, 32);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (38, 75);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (57, 81);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (42, 63);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (20, 64);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (55, 76);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (27, 11);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (1, 79);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (20, 17);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (4, 6);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (8, 23);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (76, 26);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (18, 4);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (43, 95);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (96, 98);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (51, 28);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (19, 20);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (8, 84);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (22, 73);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (19, 49);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (12, 87);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (3, 53);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (59, 37);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (95, 56);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (48, 17);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (10, 16);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (93, 19);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (94, 85);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (91, 61);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (1, 82);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (82, 59);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (35, 91);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (91, 58);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (41, 50);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (87, 24);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (83, 22);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (5, 86);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (74, 42);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (63, 30);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (57, 8);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (1, 89);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (94, 92);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (37, 76);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (23, 99);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (91, 14);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (99, 3);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (34, 62);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (39, 70);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (100, 71);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (45, 27);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (26, 56);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (7, 25);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (70, 7);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (90, 97);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (89, 54);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (74, 7);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (35, 35);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (36, 88);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (10, 15);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (89, 72);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (11, 4);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (43, 53);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (33, 80);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (46, 17);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (95, 72);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (36, 58);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (68, 63);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (11, 28);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (86, 91);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (17, 54);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (62, 49);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (17, 64);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (64, 42);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (58, 74);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (98, 93);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (31, 47);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (2, 11);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (24, 45);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (42, 95);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (91, 79);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (3, 76);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (38, 5);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (60, 4);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (53, 35);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (86, 46);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (97, 83);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (16, 81);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (78, 94);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (64, 88);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (3, 11);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (54, 3);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (95, 98);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (3, 16);
-insert into Proyecto_Tarea (id_proyecto, id_tarea) values (5, 53);
-
 insert into Tarea_Tarea (id_tarea1, id_tarea2) values (1, 68);
 insert into Tarea_Tarea (id_tarea1, id_tarea2) values (1, 81);
 insert into Tarea_Tarea (id_tarea1, id_tarea2) values (3, 64);
@@ -666,41 +754,3 @@ insert into Tarea_Tarea (id_tarea1, id_tarea2) values (92, 100);
 insert into Tarea_Tarea (id_tarea1, id_tarea2) values (94, 100);
 insert into Tarea_Tarea (id_tarea1, id_tarea2) values (99, 100);
 insert into Tarea_Tarea (id_tarea1, id_tarea2) values (93, 100);
-
-delimiter //
-create procedure crearParticipante (in _id int, in _nombre varchar(40))
-begin
-insert into Participante (id, nombre) values (_id, _nombre);
-end //
-
-delimiter //
-create procedure crearProyecto (in _id int, in _nombre varchar(40), in _objetivo varchar(60), in _fecha_inicio date,
-								in _fecha_fin date, in _descripcion text(120), in _responsable int)
-begin
-insert into Proyecto (id, nombre, objetivo, fecha_inicio, fecha_fin, descripcion, responsable) 
-values (_id, _nombre, _objetivo, _fecha_inicio, _fecha_fin, _descripcion, _responsable);
-end //
-
-delimiter //
-create procedure crearTarea (in _id int, in _nombre varchar(40), _fecha_inicio date, _fecha_fin date, 
-							in _estado set("Pendiente", "En Proceso", "Terminada", "Cancelada"),
-                            in _prioridad set("Baja", "Normal", "Alta", "Urgente"),
-							in _descripcion text(120), _id_proyecto int)
-begin
-insert into Tarea (id, nombre, fecha_inicio, fecha_fin, estado, prioridad, descripcion, id_proyecto) 
-values (_id, _nombre, _fecha_inicio, _fecha_fin, _estado, _prioridad, _descripcion, _id_proyecto);
-end //
-
-delimiter //
-create procedure asignarTarea (in _id_tarea int, in _id_participante int)
-begin
-insert into Tarea_Participante (id_tarea, id_participante) 
-values (_id_tarea, _id_participante);
-end //
-
-delimiter //
-create procedure asignarPrecedenciaTarea (in _id_tarea1 int, in _id_tarea2 int)
-begin
-insert into Tarea_Tarea (id_tarea1, _id_tarea2) 
-values (_id_tarea1, _id_tarea2);
-end //

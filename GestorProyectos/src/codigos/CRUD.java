@@ -22,20 +22,20 @@ public class CRUD {
         this.con = con;
     }
     
-    public String altaParticipante(int id, String nombre) throws SQLException{
-        String proceso = "call altaParticipante('" + id + "','" + nombre + "')";
+    public String altaParticipante(String nombre, String apellidoP, String apellidoM, String usuario, String cargo) throws SQLException{
+        String proceso = "call altaParticipante('" + nombre + "','" + apellidoP + "','" + apellidoM + "','" + usuario + "','" + cargo + "')";
         ResultSetMetaData resultado = (ResultSetMetaData)con.call(proceso).getMetaData();
         return resultado.toString();
     }
     
-    public String altaProyecto(int id, String nombre, String objetivo, String fecha_inicio, String fecha_fin, String descripcion, int responsable) throws SQLException{
-        String proceso = "call altaProyecto('" + id + "','" + nombre + "','" + objetivo + "','" + fecha_inicio + "','" + fecha_fin + "','" + descripcion + "','" + responsable + "')";
+    public String altaProyecto(String nombre, String objetivo, String fecha_inicio, String fecha_fin, String descripcion, int responsable) throws SQLException{
+        String proceso = "call altaProyecto('" + nombre + "','" + objetivo + "','" + fecha_inicio + "','" + fecha_fin + "','" + descripcion + "','" + responsable + "')";
         ResultSetMetaData resultado = (ResultSetMetaData)con.call(proceso).getMetaData();
         return resultado.toString();
     }
     
-    public String altaTarea(int id, String nombre, String fecha_inicio, String fecha_fin, String Estado, String prioridad, String descripcion) throws SQLException{
-        String proceso = "call altaTarea('" + id + "','" + nombre + "','" + fecha_inicio + "','" + fecha_fin + "','" + prioridad + "','" + descripcion + "')";
+    public String altaTarea(String nombre, String fecha_inicio, String fecha_fin, String Estado, String prioridad, String descripcion) throws SQLException{
+        String proceso = "call altaTarea('" + nombre + "','" + fecha_inicio + "','" + fecha_fin + "','" + prioridad + "','" + descripcion + "')";
         ResultSetMetaData resultado = (ResultSetMetaData)con.call(proceso).getMetaData();
         return resultado.toString();
     }

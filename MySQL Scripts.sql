@@ -100,7 +100,7 @@ delimiter //
 create procedure altaParticipante (in _nombre varchar(40), in _apellidoP varchar(20), in _apellidoM varchar(20), in _usuario varchar(20), in _cargo set("Participante", "Administrador de Proyecto", "Administrador General"))
 begin
 insert into Participante (nombre, apellidoP, apellidoM, usuario, cargo) values (_nombre, _apellidoP, _apellidoM, _usuario, _cargo);
-create user _usuario@'%';
+create user _usuario@'%' identified by '',_usuario;
 call permisos(_usuario, _cargo);
 end //
 
@@ -143,7 +143,7 @@ create procedure participantes ()
 begin
 declare _id int;
 declare _cargo set("Participante", "Administrador de Proyecto", "Administrador General");
-declare _usuario varchar(10);
+declare _usuario varchar(20);
 set _usuario = substring(current_user(), 1, locate('@', current_user()) - 1);
 set _id = (select id from Participante where usuario = _usuario);
 set _cargo = (select cargo from Participante where usuario = _usuario);
@@ -173,7 +173,7 @@ create procedure proyectos ()
 begin
 declare _id int;
 declare _cargo set("Participante", "Administrador de Proyecto", "Administrador General");
-declare _usuario varchar(10);
+declare _usuario varchar(20);
 set _usuario = substring(current_user(), 1, locate('@', current_user()) - 1);
 set _id = (select id from Participante where usuario = _usuario);
 set _cargo = (select cargo from Participante where usuario = _usuario);
@@ -206,7 +206,7 @@ create procedure tareas ()
 begin
 declare _id int;
 declare _cargo set("Participante", "Administrador de Proyecto", "Administrador General");
-declare _usuario varchar(10);
+declare _usuario varchar(20);
 set _usuario = substring(current_user(), 1, locate('@', current_user()) - 1);
 set _id = (select id from Participante where usuario = _usuario);
 set _cargo = (select cargo from Participante where usuario = _usuario);
@@ -766,3 +766,5 @@ insert into Tarea_Tarea (id_tarea1, id_tarea2) values (92, 100);
 insert into Tarea_Tarea (id_tarea1, id_tarea2) values (94, 100);
 insert into Tarea_Tarea (id_tarea1, id_tarea2) values (99, 100);
 insert into Tarea_Tarea (id_tarea1, id_tarea2) values (93, 100);
+
+call altaParticipante ("grillo","pepe","segundo","grillito2","Participante");

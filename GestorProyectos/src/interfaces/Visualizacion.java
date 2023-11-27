@@ -527,7 +527,7 @@ public class Visualizacion extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        CrearCuenta p = new CrearCuenta(c);
+        Participante p = new Participante(c);
         p.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 

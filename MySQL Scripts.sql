@@ -141,24 +141,28 @@ end //
 delimiter //
 create procedure participantes ()
 begin
-declare sub json;
-set sub = (select id, cargo from Participante where usuario = substring(current_user(), 1, locate('@', current_user()) - 1));
+declare _id int;
+declare _cargo set("Participante", "Administrador de Proyecto", "Administrador General");
+declare _usuario varchar(10);
+set _usuario = substring(current_user(), 1, locate('@', current_user()) - 1);
+set _id = (select id from Participante where usuario = _usuario);
+set _cargo = (select cargo from Participante where usuario = _usuario);
 case 
 
-when sub.cargo = "Participante" then
+when _cargo = "Participante" then
 select p.nombre as Nombre, p.apellidoP as 'Apellido Paterno', p.apellidoM as 'Apellido Materno', t.id_tarea as Tarea
-from participante p, tarea_participante t, (select id_tarea t from tarea_participante p where sub.id = id_participante) tr 
+from participante p, tarea_participante t, (select id_tarea t from tarea_participante p where _id = id_participante) tr 
 where p.id = t.id_participante and tr.t = t.id_tarea;
 
-when sub.cargo = "Administrador de Proyecto" then /* cambio pendiente*/
+when _cargo = "Administrador de Proyecto" then /* cambio pendiente*/
 select pr.nombre as Proyecto, t.nombre as Tarea, p2.* from participante p 
 inner join proyecto pr on p.id = pr.responsable
 inner join tarea t on t.id_proyecto = pr.id
 inner join tarea_participante tp on tp.id_tarea = t.id
 inner join participante p2 on p2.id = tp.id_participante
-where p.id = sub.id; 
+where p.id = _id; 
 
-when sub.cargo = "Administrador General" then
+when _cargo = "Administrador General" or _usuario = "root" then
 select * from participante;
 
 end case;
@@ -167,27 +171,31 @@ end //
 delimiter //
 create procedure proyectos ()
 begin
-declare sub json;
-set sub = (select id, cargo from Participante where usuario = substring(current_user(), 1, locate('@', current_user()) - 1));
+declare _id int;
+declare _cargo set("Participante", "Administrador de Proyecto", "Administrador General");
+declare _usuario varchar(10);
+set _usuario = substring(current_user(), 1, locate('@', current_user()) - 1);
+set _id = (select id from Participante where usuario = _usuario);
+set _cargo = (select cargo from Participante where usuario = _usuario);
 case 
 
-when sub.cargo = "Participante" then
+when _cargo = "Participante" then
 select p.* from proyecto p
 inner join tarea t on t.id_proyecto = p.id
 inner join tarea_participante tp on tp.id_tarea = t.id
-where tp.id_participante = sub.id;
+where tp.id_participante = _id;
 
-when sub.cargo = "Administrador de Proyecto" then 
+when _cargo = "Administrador de Proyecto" then 
 select p.* from proyecto p, participante pr
 where p.responsable = pr.id 
 union 
 select p.* from proyecto p
 inner join tarea t on t.id_proyecto = p.id
 inner join tarea_participante tp on tp.id_tarea = t.id
-where tp.id_participante = sub.id;
+where tp.id_participante = _id;
 
 
-when sub.cargo = "Administrador General" then
+when _cargo = "Administrador General" or _usuario = "root" then
 select * from proyecto;
 
 end case;
@@ -196,22 +204,26 @@ end //
 delimiter //
 create procedure tareas ()
 begin
-declare sub json;
-set sub = (select id, cargo from Participante where usuario = substring(current_user(), 1, locate('@', current_user()) - 1));
+declare _id int;
+declare _cargo set("Participante", "Administrador de Proyecto", "Administrador General");
+declare _usuario varchar(10);
+set _usuario = substring(current_user(), 1, locate('@', current_user()) - 1);
+set _id = (select id from Participante where usuario = _usuario);
+set _cargo = (select cargo from Participante where usuario = _usuario);
 case 
 
-when sub.cargo = "Participante" then
+when _cargo = "Participante" then
 select p.nombre, t.nombre, t.fecha_inicio, t.fecha_fin, t.estado, t.prioridad, t.descripcion
 from tarea t inner join proyecto p on t.id_proyecto = p.id
 inner join tarea_participante tp on t.id = tp.id_tarea
-where tp.id_participante = sub.id;
+where tp.id_participante = _id;
 
-when sub.cargo = "Administrador de Proyecto" then /* cambio pendiente*/
+when _cargo = "Administrador de Proyecto" then /* cambio pendiente*/
 select * from tarea t
 inner join proyecto p on t.id_proyecto = p.id
-where p.responsable = sub.id;
+where p.responsable = _id;
 
-when sub.cargo = "Administrador General" then
+when _cargo = "Administrador General" or _usuario = "root" then
 select * from tarea;
 end case;
 

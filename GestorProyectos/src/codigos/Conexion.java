@@ -29,7 +29,7 @@ final public class Conexion {
         this.password = password;
     }
 
-    public Connection iniciar() throws ClassNotFoundException, SQLException {
+    public Connection iniciar() throws SQLException {
         con = (Connection) DriverManager.getConnection(this.url, this.usuario, this.password);
         return con;
     }

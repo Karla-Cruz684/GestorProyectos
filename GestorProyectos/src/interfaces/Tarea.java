@@ -4,6 +4,8 @@
  */
 package interfaces;
 
+import codigos.CRUD;
+
 /**
  *
  * @author mares
@@ -13,7 +15,7 @@ public class Tarea extends javax.swing.JFrame {
     /**
      * Creates new form Tarea
      */
-    public Tarea() {
+    public Tarea(CRUD c) {
         initComponents();
     }
 

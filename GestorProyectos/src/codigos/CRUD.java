@@ -57,13 +57,18 @@ public class CRUD {
         final ResultSet rs = con.call(proceso);
         ResultSetMetaData rsmd = (ResultSetMetaData)rs.getMetaData();
         ArrayList<Object[]> registros = new ArrayList<>();
-        do {            
+        Object[] encabezado = new Object[rsmd.getColumnCount()];
+        for (int i = 0; i < rsmd.getColumnCount(); i++) {
+            encabezado[i] = rsmd.getColumnName(i+1);
+        }
+        registros.add(encabezado);
+        while (rs.next()){            
             Object[] filas = new Object[rsmd.getColumnCount()];
             for (int i = 0; i < rsmd.getColumnCount(); i++) {
                 filas[i] = rs.getObject(i+1);
             }
             registros.add(filas);
-        }while (rs.next());
+        }
         return registros;
     }
     
@@ -72,13 +77,18 @@ public class CRUD {
         final ResultSet rs = con.call(proceso);
         ResultSetMetaData rsmd = (ResultSetMetaData)rs.getMetaData();
         ArrayList<Object[]> registros = new ArrayList<>();
-        do{            
+        Object[] encabezado = new Object[rsmd.getColumnCount()];
+        for (int i = 0; i < rsmd.getColumnCount(); i++) {
+            encabezado[i] = rsmd.getColumnName(i+1);
+        }
+        registros.add(encabezado);
+        while (rs.next()){            
             Object[] filas = new Object[rsmd.getColumnCount()];
             for (int i = 0; i < rsmd.getColumnCount(); i++) {
                 filas[i] = rs.getObject(i+1);
             }
             registros.add(filas);
-        }while (rs.next());
+        }
         return registros;
     }
     
@@ -87,13 +97,18 @@ public class CRUD {
         final ResultSet rs = con.call(proceso);
         ResultSetMetaData rsmd = (ResultSetMetaData)rs.getMetaData();
         ArrayList<Object[]> registros = new ArrayList<>();
-        do{            
+        Object[] encabezado = new Object[rsmd.getColumnCount()];
+        for (int i = 0; i < rsmd.getColumnCount(); i++) {
+            encabezado[i] = rsmd.getColumnName(i+1);
+        }
+        registros.add(encabezado);
+        while (rs.next()){            
             Object[] filas = new Object[rsmd.getColumnCount()];
             for (int i = 0; i < rsmd.getColumnCount(); i++) {
                 filas[i] = rs.getObject(i+1);
             }
             registros.add(filas);
-        }while (rs.next());
+        }
         return registros;
     }
     

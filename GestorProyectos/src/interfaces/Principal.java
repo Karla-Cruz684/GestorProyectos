@@ -1,6 +1,7 @@
 
 package interfaces;
 
+import codigos.CRUD;
 import codigos.Conexion;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -163,16 +164,13 @@ public class Principal extends javax.swing.JFrame {
         try {
             c.iniciar();
             if(c.isConectado()){
-                JOptionPane.showMessageDialog(this, "Inicio de sescion valido " + txtUsuario.getText() + "-" + txtPassword.getText());
-                Visualizacion v = new Visualizacion(c);
+                JOptionPane.showMessageDialog(this, "Inicio de sescion valido");
+                Visualizacion v = new Visualizacion(new CRUD(c));
                 v.setVisible(true);
                 this.dispose();
             }
-        } catch (ClassNotFoundException ex) {
-            System.out.println(ex);
         } catch (SQLException ex) {
-            System.out.println(ex);
-            JOptionPane.showMessageDialog(this, "Inicio de sescion invalido " + txtUsuario.getText() + "-" + txtPassword.getText());
+            JOptionPane.showMessageDialog(this, "Inicio de sescion invalido");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

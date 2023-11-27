@@ -1,9 +1,11 @@
 
 package interfaces;
 
+import codigos.CRUD;
+
 public class CrearCuenta extends javax.swing.JFrame {
 
-    public CrearCuenta() {
+    public CrearCuenta(CRUD c) {
         initComponents();
     }
 

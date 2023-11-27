@@ -4,6 +4,8 @@
  */
 package interfaces;
 
+import codigos.CRUD;
+
 /**
  *
  * @author mares
@@ -13,7 +15,7 @@ public class Proyecto extends javax.swing.JFrame {
     /**
      * Creates new form Proyecto
      */
-    public Proyecto() {
+    public Proyecto(CRUD c) {
         initComponents();
     }
 

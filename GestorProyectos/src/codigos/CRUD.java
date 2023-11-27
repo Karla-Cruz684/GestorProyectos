@@ -4,8 +4,10 @@
  */
 package codigos;
 
-import com.mysql.jdbc.ResultSetMetaData;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -48,6 +50,51 @@ public class CRUD {
         String proceso = "call asignarPrecedenciaTarea('" + id_tarea1 + "','" + id_tarea2 + "')";
         ResultSetMetaData resultado = (ResultSetMetaData)con.call(proceso).getMetaData();
         return resultado.toString();
+    }
+    
+    public ArrayList<Object[]> participantes() throws SQLException{
+        String proceso = "call participantes()";
+        final ResultSet rs = con.call(proceso);
+        ResultSetMetaData rsmd = (ResultSetMetaData)rs.getMetaData();
+        ArrayList<Object[]> registros = new ArrayList<>();
+        do {            
+            Object[] filas = new Object[rsmd.getColumnCount()];
+            for (int i = 0; i < rsmd.getColumnCount(); i++) {
+                filas[i] = rs.getObject(i+1);
+            }
+            registros.add(filas);
+        }while (rs.next());
+        return registros;
+    }
+    
+    public ArrayList<Object[]> tareas() throws SQLException{
+        String proceso = "call tareas()";
+        final ResultSet rs = con.call(proceso);
+        ResultSetMetaData rsmd = (ResultSetMetaData)rs.getMetaData();
+        ArrayList<Object[]> registros = new ArrayList<>();
+        do{            
+            Object[] filas = new Object[rsmd.getColumnCount()];
+            for (int i = 0; i < rsmd.getColumnCount(); i++) {
+                filas[i] = rs.getObject(i+1);
+            }
+            registros.add(filas);
+        }while (rs.next());
+        return registros;
+    }
+    
+    public ArrayList<Object[]> proyectos() throws SQLException{
+        String proceso = "call proyectos()";
+        final ResultSet rs = con.call(proceso);
+        ResultSetMetaData rsmd = (ResultSetMetaData)rs.getMetaData();
+        ArrayList<Object[]> registros = new ArrayList<>();
+        do{            
+            Object[] filas = new Object[rsmd.getColumnCount()];
+            for (int i = 0; i < rsmd.getColumnCount(); i++) {
+                filas[i] = rs.getObject(i+1);
+            }
+            registros.add(filas);
+        }while (rs.next());
+        return registros;
     }
     
     

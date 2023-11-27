@@ -146,12 +146,12 @@ set sub = (select id, cargo from Participante where usuario = substring(current_
 case 
 
 when sub.cargo = "Participante" then
-select p.nombre, p.apellidoP, p.apellidoM, t.id_tarea 
+select p.nombre as Nombre, p.apellidoP as 'Apellido Paterno', p.apellidoM as 'Apellido Materno', t.id_tarea as Tarea
 from participante p, tarea_participante t, (select id_tarea t from tarea_participante p where sub.id = id_participante) tr 
 where p.id = t.id_participante and tr.t = t.id_tarea;
 
 when sub.cargo = "Administrador de Proyecto" then /* cambio pendiente*/
-select pr.nombre, t.nombre, p2.* from participante p 
+select pr.nombre as Proyecto, t.nombre as Tarea, p2.* from participante p 
 inner join proyecto pr on p.id = pr.responsable
 inner join tarea t on t.id_proyecto = pr.id
 inner join tarea_participante tp on tp.id_tarea = t.id

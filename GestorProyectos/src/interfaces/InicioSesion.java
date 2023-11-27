@@ -7,7 +7,6 @@ public class InicioSesion extends javax.swing.JFrame {
 
     public InicioSesion() {
         initComponents();
-        //jPanel1.setBackground(Color.PINK);
     }
 
     @SuppressWarnings("unchecked")
@@ -33,17 +32,17 @@ public class InicioSesion extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI Historic", 1, 18)); // NOI18N
         jLabel2.setText("¿Qué tanto conoces del sistema?");
 
-        jButton1.setFont(new java.awt.Font("Monotype Corsiva", 0, 24)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Century Schoolbook", 0, 18)); // NOI18N
         jButton1.setText("Principiante");
-        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 255), 2));
+        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jButton2.setFont(new java.awt.Font("Monotype Corsiva", 0, 24)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Century Schoolbook", 0, 18)); // NOI18N
         jButton2.setText("Intermedio");
-        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 255), 2));
+        jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jButton3.setFont(new java.awt.Font("Monotype Corsiva", 0, 24)); // NOI18N
+        jButton3.setFont(new java.awt.Font("Century Schoolbook", 0, 18)); // NOI18N
         jButton3.setText("Avanzado");
-        jButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 204), 2));
+        jButton3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jButton4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton4.setText("Atrás");

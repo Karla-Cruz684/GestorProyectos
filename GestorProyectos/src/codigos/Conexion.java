@@ -4,11 +4,11 @@
  */
 package codigos;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
-import com.mysql.jdbc.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -22,16 +22,15 @@ final public class Conexion {
     private final String url = "jdbc:mysql://localhost:3306/" + base;
     private Connection con = null;
     private final String usuario;
-    private final String contraseña;
+    private final String password;
 
-    public Conexion(String usuario, String contraseña) {
+    public Conexion(String usuario, String password) {
         this.usuario = usuario;
-        this.contraseña = contraseña;
+        this.password = password;
     }
 
     public Connection iniciar() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.Driver");
-        con = (Connection) DriverManager.getConnection(this.url, this.usuario, this.contraseña);
+        con = (Connection) DriverManager.getConnection(this.url, this.usuario, this.password);
         return con;
     }
 
@@ -50,7 +49,7 @@ final public class Conexion {
         return rs;
     }
 
-    public boolean isConectado() {
+    public boolean isConectado() throws SQLException {
         return !con.isClosed();
     }
     

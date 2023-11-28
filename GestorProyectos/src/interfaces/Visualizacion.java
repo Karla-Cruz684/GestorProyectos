@@ -183,6 +183,7 @@ public class Visualizacion extends javax.swing.JFrame {
         );
 
         jLabel6.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Logo sin fondo_resized.png"))); // NOI18N
         jLabel6.setText("A.K.L.K");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -316,6 +317,7 @@ public class Visualizacion extends javax.swing.JFrame {
         );
 
         jLabel4.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Logo sin fondo_resized.png"))); // NOI18N
         jLabel4.setText("A.K.L.K");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -450,6 +452,7 @@ public class Visualizacion extends javax.swing.JFrame {
         );
 
         jLabel2.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Logo sin fondo_resized.png"))); // NOI18N
         jLabel2.setText("A.K.L.K");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

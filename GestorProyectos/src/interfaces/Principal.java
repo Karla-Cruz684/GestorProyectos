@@ -34,6 +34,8 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 255));
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Logo sin fondo_resized.png"))); // NOI18N
+
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N

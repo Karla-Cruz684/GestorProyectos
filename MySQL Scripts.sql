@@ -267,6 +267,7 @@ begin
 delete from proyecto where id = _id;
 end //
 
+/*
 insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (1, 'Rafaellle', 'Ogg', 'Eacott', 'reacott0', 'Administrador General');
 insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (2, 'Alyce', 'Maiden', 'Manass', 'amanass1', 'Participante');
 insert into Participante (id, nombre, apellidoM, apellidoP, usuario, cargo) values (3, 'Aliza', 'Gleed', 'Cortez', 'acortez2', 'Participante');
@@ -771,3 +772,4 @@ insert into Tarea_Tarea (id_tarea1, id_tarea2) values (92, 100);
 insert into Tarea_Tarea (id_tarea1, id_tarea2) values (94, 100);
 insert into Tarea_Tarea (id_tarea1, id_tarea2) values (99, 100);
 insert into Tarea_Tarea (id_tarea1, id_tarea2) values (93, 100);
+*/

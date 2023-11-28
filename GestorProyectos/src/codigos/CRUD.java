@@ -38,8 +38,8 @@ public class CRUD {
         return resultado.toString();
     }
     
-    public String altaTarea(String nombre, String fecha_inicio, String fecha_fin, String Estado, String prioridad, String descripcion) throws SQLException{
-        String proceso = "call altaTarea('" + nombre + "','" + fecha_inicio + "','" + fecha_fin + "','" + prioridad + "','" + descripcion + "')";
+    public String altaTarea(String nombre, String fecha_inicio, String fecha_fin, String estado, String prioridad, String descripcion, String proyecto) throws SQLException{
+        String proceso = "call altaTarea('" + nombre + "','" + fecha_inicio + "','" + fecha_fin + "','" + estado + "','" + prioridad + "','" + descripcion + "','" + proyecto + "')";
         ResultSetMetaData resultado = (ResultSetMetaData)con.call(proceso).getMetaData();
         return resultado.toString();
     }

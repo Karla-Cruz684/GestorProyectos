@@ -59,23 +59,32 @@ create table Tarea_Tarea(
 /* --------------Procesos de permisos--------------------------------------------------------------- */
 
 delimiter //
+create procedure darPermiso (in _proceso varchar(20), in _usuario varchar(20))
+begin
+set @consulta = concat('grant execute on procedure ',_proceso,' to "',_usuario,'"@"%"');
+prepare _otorgarPermisos from @consulta;
+execute _otorgarPermisos;
+deallocate prepare _otorgarPermisos;
+end //
+
+delimiter //
 create procedure permisos (in _usuario varchar(20), in _permiso set ('Participante','Administrador de Proyecto','Administrador General'))
 begin
 case 
 when _permiso = 'Participante' then
-grant execute on procedure participantes to _usuario@'%';
-grant execute on procedure tareas to _usuario@'%';
-grant execute on procedure proyectos to _usuario@'%';
+call darPermiso ('participantes', _usuario);
+call darPermiso ('tareas', _usuario);
+call darPermiso ('proyectos', _usuario);
 
 when _permiso = 'Administrador de Proyecto' then
-grant execute on procedure participantes to _usuario@'%';
-grant execute on procedure tareas to _usuario@'%';
-grant execute on procedure proyectos to _usuario@'%';
-grant execute on procedure altaTarea to _usuario@'%';
-grant execute on procedure asignarTarea to _usuario@'%';
-grant execute on procedure asignarPrecedenciaTarea to _usuario@'%';
-grant execute on procedure tareaActualizacion to _usuario@'%';
-grant execute on procedure tareaBorrar to _usuario@'%';
+grant execute on procedure participantes 			to "'",_usuario,"'"@'%';
+grant execute on procedure tareas 					to "'",_usuario,"'"@'%';
+grant execute on procedure proyectos 				to "'",_usuario,"'"@'%';
+grant execute on procedure altaTarea 				to "'",_usuario,"'"@'%';
+grant execute on procedure asignarTarea 			to "'",_usuario,"'"@'%';
+grant execute on procedure asignarPrecedenciaTarea 	to "'",_usuario,"'"@'%';
+grant execute on procedure tareaActualizacion 		to "'",_usuario,"'"@'%';
+grant execute on procedure tareaBorrar 				to "'",_usuario,"'"@'%';
 
 when _permiso = 'Administrador General' then
 grant execute on procedure participantes to _usuario@'%';
@@ -100,7 +109,10 @@ delimiter //
 create procedure altaParticipante (in _nombre varchar(40), in _apellidoP varchar(20), in _apellidoM varchar(20), in _usuario varchar(20), in _cargo set("Participante", "Administrador de Proyecto", "Administrador General"))
 begin
 insert into Participante (nombre, apellidoP, apellidoM, usuario, cargo) values (_nombre, _apellidoP, _apellidoM, _usuario, _cargo);
-create user _usuario@'%' identified by '',_usuario;
+set @consulta = concat('create user "',_usuario,'"@"%" identified by "',_usuario,'"');
+prepare _crearUsuario from @consulta;
+execute _crearUsuario;
+deallocate prepare _crearUsuario;
 call permisos(_usuario, _cargo);
 end //
 
@@ -144,17 +156,16 @@ begin
 declare _id int;
 declare _cargo set("Participante", "Administrador de Proyecto", "Administrador General");
 declare _usuario varchar(20);
-set _usuario = substring(current_user(), 1, locate('@', current_user()) - 1);
+set _usuario = substring(user(), 1, locate('@', user()) - 1);
 set _id = (select id from Participante where usuario = _usuario);
 set _cargo = (select cargo from Participante where usuario = _usuario);
-case 
 
-when _cargo = "Participante" then
+if _cargo = "Participante" then
 select p.nombre as Nombre, p.apellidoP as 'Apellido Paterno', p.apellidoM as 'Apellido Materno', t.id_tarea as Tarea
 from participante p, tarea_participante t, (select id_tarea t from tarea_participante p where _id = id_participante) tr 
 where p.id = t.id_participante and tr.t = t.id_tarea;
 
-when _cargo = "Administrador de Proyecto" then /* cambio pendiente*/
+elseif _cargo = "Administrador de Proyecto" then /* cambio pendiente*/
 select pr.nombre as Proyecto, t.nombre as Tarea, p2.* from participante p 
 inner join proyecto pr on p.id = pr.responsable
 inner join tarea t on t.id_proyecto = pr.id
@@ -162,10 +173,9 @@ inner join tarea_participante tp on tp.id_tarea = t.id
 inner join participante p2 on p2.id = tp.id_participante
 where p.id = _id; 
 
-when _cargo = "Administrador General" or _usuario = "root" then
+elseif _cargo = "Administrador General" or _usuario = "root" then
 select * from participante;
-
-end case;
+end if;
 end //
 
 delimiter //
@@ -174,18 +184,17 @@ begin
 declare _id int;
 declare _cargo set("Participante", "Administrador de Proyecto", "Administrador General");
 declare _usuario varchar(20);
-set _usuario = substring(current_user(), 1, locate('@', current_user()) - 1);
+set _usuario = substring(user(), 1, locate('@', user()) - 1);
 set _id = (select id from Participante where usuario = _usuario);
 set _cargo = (select cargo from Participante where usuario = _usuario);
-case 
 
-when _cargo = "Participante" then
+if _cargo = "Participante" then
 select p.* from proyecto p
 inner join tarea t on t.id_proyecto = p.id
 inner join tarea_participante tp on tp.id_tarea = t.id
 where tp.id_participante = _id;
 
-when _cargo = "Administrador de Proyecto" then 
+elseif _cargo = "Administrador de Proyecto" then 
 select p.* from proyecto p, participante pr
 where p.responsable = pr.id 
 union 
@@ -194,11 +203,9 @@ inner join tarea t on t.id_proyecto = p.id
 inner join tarea_participante tp on tp.id_tarea = t.id
 where tp.id_participante = _id;
 
-
-when _cargo = "Administrador General" or _usuario = "root" then
+elseif _cargo = "Administrador General" or _usuario = "root" then
 select * from proyecto;
-
-end case;
+end if;
 end //
 
 delimiter //
@@ -207,26 +214,24 @@ begin
 declare _id int;
 declare _cargo set("Participante", "Administrador de Proyecto", "Administrador General");
 declare _usuario varchar(20);
-set _usuario = substring(current_user(), 1, locate('@', current_user()) - 1);
+set _usuario = substring(user(), 1, locate('@', user()) - 1);
 set _id = (select id from Participante where usuario = _usuario);
 set _cargo = (select cargo from Participante where usuario = _usuario);
-case 
 
-when _cargo = "Participante" then
+if _cargo = "Participante" then
 select p.nombre, t.nombre, t.fecha_inicio, t.fecha_fin, t.estado, t.prioridad, t.descripcion
 from tarea t inner join proyecto p on t.id_proyecto = p.id
 inner join tarea_participante tp on t.id = tp.id_tarea
 where tp.id_participante = _id;
 
-when _cargo = "Administrador de Proyecto" then /* cambio pendiente*/
+elseif _cargo = "Administrador de Proyecto" then /* cambio pendiente*/
 select * from tarea t
 inner join proyecto p on t.id_proyecto = p.id
 where p.responsable = _id;
 
-when _cargo = "Administrador General" or _usuario = "root" then
+elseif _cargo = "Administrador General" or _usuario = "root" then
 select * from tarea;
-end case;
-
+end if;
 end //
 
 /* --------------Procesos de actualizacion de registros--------------------------------------------------------------- */
@@ -766,5 +771,3 @@ insert into Tarea_Tarea (id_tarea1, id_tarea2) values (92, 100);
 insert into Tarea_Tarea (id_tarea1, id_tarea2) values (94, 100);
 insert into Tarea_Tarea (id_tarea1, id_tarea2) values (99, 100);
 insert into Tarea_Tarea (id_tarea1, id_tarea2) values (93, 100);
-
-call altaParticipante ("grillo","pepe","segundo","grillito2","Participante");

@@ -22,13 +22,17 @@ public class CRUD {
         this.con = con;
     }
     
+    public void cerrarConexion(){
+        con.cerrar();
+    }
+    
     public String altaParticipante(String nombre, String apellidoP, String apellidoM, String usuario, String cargo) throws SQLException{
         String proceso = "call altaParticipante('" + nombre + "','" + apellidoP + "','" + apellidoM + "','" + usuario + "','" + cargo + "')";
         ResultSetMetaData resultado = (ResultSetMetaData)con.call(proceso).getMetaData();
         return resultado.toString();
     }
     
-    public String altaProyecto(String nombre, String objetivo, String fecha_inicio, String fecha_fin, String descripcion, int responsable) throws SQLException{
+    public String altaProyecto(String nombre, String objetivo, String fecha_inicio, String fecha_fin, String descripcion, String responsable) throws SQLException{
         String proceso = "call altaProyecto('" + nombre + "','" + objetivo + "','" + fecha_inicio + "','" + fecha_fin + "','" + descripcion + "','" + responsable + "')";
         ResultSetMetaData resultado = (ResultSetMetaData)con.call(proceso).getMetaData();
         return resultado.toString();

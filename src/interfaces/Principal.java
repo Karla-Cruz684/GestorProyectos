@@ -166,13 +166,13 @@ public class Principal extends javax.swing.JFrame {
         try {
             c.iniciar();
             if(c.isConectado()){
-                JOptionPane.showMessageDialog(this, "Prueba1"); //Cambio mensaje
+                JOptionPane.showMessageDialog(this, "Inicio de sesión válido");
                 Visualizacion v = new Visualizacion(new CRUD(c));
                 v.setVisible(true);
                 this.dispose();
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Inicio de sescion invalido");
+            JOptionPane.showMessageDialog(this, "Inicio de sesión inválido");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

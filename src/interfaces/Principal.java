@@ -47,8 +47,8 @@ public class Principal extends javax.swing.JFrame {
         txtUsuario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Usuario", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Century Schoolbook", 0, 14))); // NOI18N
 
         txtPassword.setForeground(new java.awt.Color(204, 204, 204));
-        txtPassword.setText("Introduzca contraseña");
-        txtPassword.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contraseña", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook", 0, 14))); // NOI18N
+        txtPassword.setText("Introduzca contrase a");
+        txtPassword.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contrase a", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook", 0, 14))); // NOI18N
 
         jButton1.setBackground(new java.awt.Color(255, 204, 102));
         jButton1.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
@@ -166,7 +166,7 @@ public class Principal extends javax.swing.JFrame {
         try {
             c.iniciar();
             if(c.isConectado()){
-                JOptionPane.showMessageDialog(this, "Inicio de sescion valido");
+                JOptionPane.showMessageDialog(this, "Prueba1"); //Cambio mensaje
                 Visualizacion v = new Visualizacion(new CRUD(c));
                 v.setVisible(true);
                 this.dispose();

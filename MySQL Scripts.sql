@@ -22,7 +22,7 @@ create table Proyecto(
     fecha_fin		date,
     descripcion		text(200),
     responsable		int,
-    foreign key (responsable) references Participante(id)
+    foreign key (responsable) references Participante(id) on delete no action
 );
 
 -- Tabla Tarea = Almacenara todas los tareas existentes en la base
@@ -35,7 +35,7 @@ create table Tarea(
     prioridad		set("Baja", "Normal", "Alta", "Urgente"),
     descripcion		text(200),
     id_proyecto 	int,
-    foreign key (id_proyecto) references Proyecto(id)
+    foreign key (id_proyecto) references Proyecto(id) on delete cascade
 );
 
 -- Tabla Tarea_Participante = Almacenara todas las asignaciones de Tarea a Participante existentes en la base
@@ -43,8 +43,8 @@ create table Tarea_Participante(
 	id_tarea			int not null,
 	id_participante		int not null,
     primary key (id_tarea, id_participante),
-    foreign key (id_tarea) references Tarea(id),
-    foreign key (id_participante) references Participante(id)
+    foreign key (id_tarea) references Tarea(id) on delete cascade,
+    foreign key (id_participante) references Participante(id) on delete cascade
 );
 
 -- Tabla Tarea_Tarea = Almacenara todas las precedencias entre Tareas existentes en la base
@@ -52,19 +52,28 @@ create table Tarea_Tarea(
 	id_tarea1	int not null,
     id_tarea2	int not null,
     primary key (id_tarea1, id_tarea2),
-    foreign key (id_tarea1) references Tarea(id),
-    foreign key (id_tarea2) references Tarea(id)
+    foreign key (id_tarea1) references Tarea(id) on delete cascade,
+    foreign key (id_tarea2) references Tarea(id) on delete cascade
 );
 
 /* --------------Procesos de permisos--------------------------------------------------------------- */
 
 delimiter //
-create procedure darPermiso (in _proceso varchar(20), in _usuario varchar(20))
+create procedure darPermiso (in _proceso varchar(60), in _usuario varchar(20))
 begin
 set @consulta = concat('grant execute on procedure ',_proceso,' to "',_usuario,'"@"%"');
 prepare _otorgarPermisos from @consulta;
 execute _otorgarPermisos;
 deallocate prepare _otorgarPermisos;
+end //
+
+delimiter //
+create procedure revocarPermisos (in _usuario varchar(20))
+begin
+set @consulta = concat('revoke all on *.* from "',_usuario,'"@"%"');
+prepare _revocarPermisos from @consulta;
+execute _revocarPermisos;
+deallocate prepare _revocarPermisos;
 end //
 
 delimiter //
@@ -77,28 +86,28 @@ call darPermiso ('tareas', _usuario);
 call darPermiso ('proyectos', _usuario);
 
 when _permiso = 'Administrador de Proyecto' then
-grant execute on procedure participantes 			to "'",_usuario,"'"@'%';
-grant execute on procedure tareas 					to "'",_usuario,"'"@'%';
-grant execute on procedure proyectos 				to "'",_usuario,"'"@'%';
-grant execute on procedure altaTarea 				to "'",_usuario,"'"@'%';
-grant execute on procedure asignarTarea 			to "'",_usuario,"'"@'%';
-grant execute on procedure asignarPrecedenciaTarea 	to "'",_usuario,"'"@'%';
-grant execute on procedure tareaActualizacion 		to "'",_usuario,"'"@'%';
-grant execute on procedure tareaBorrar 				to "'",_usuario,"'"@'%';
+call darPermiso ('participantes', _usuario);
+call darPermiso ('tareas', _usuario);
+call darPermiso ('proyectos', _usuario);
+call darPermiso ('altaTarea', _usuario);
+call darPermiso ('asignarTarea', _usuario);
+call darPermiso ('asignarPrecedenciaTarea', _usuario);
+call darPermiso ('tareaActualizacion', _usuario);
+call darPermiso ('tareaBorrar', _usuario);
 
 when _permiso = 'Administrador General' then
-grant execute on procedure participantes to _usuario@'%';
-grant execute on procedure tareas to _usuario@'%';
-grant execute on procedure proyectos to _usuario@'%';
-grant execute on procedure altaParticipante to _usuario@'%';
-grant execute on procedure altaTarea to _usuario@'%';
-grant execute on procedure altaProyecto to _usuario@'%';
-grant execute on procedure asignarTarea to _usuario@'%';
-grant execute on procedure asignarPrecedenciaTarea to _usuario@'%';
-grant execute on procedure tareaActualizacion to _usuario@'%';
-grant execute on procedure proyectoActualizacion to _usuario@'%';
-grant execute on procedure tareaBorrar to _usuario@'%';
-grant execute on procedure proyectoBorrar to _usuario@'%';
+call darPermiso ('participantes', _usuario);
+call darPermiso ('tareas', _usuario);
+call darPermiso ('proyectos', _usuario);
+call darPermiso ('altaParticipante', _usuario);
+call darPermiso ('altaTarea', _usuario);
+call darPermiso ('altaProyecto', _usuario);
+call darPermiso ('asignarTarea', _usuario);
+call darPermiso ('asignarPrecedenciaTarea', _usuario);
+call darPermiso ('tareaActualizacion', _usuario);
+call darPermiso ('proyectoActualizacion', _usuario);
+call darPermiso ('tareaBorrar', _usuario);
+call darPermiso ('proyectoBorrar', _usuario);
 end case;
 
 end //
@@ -234,23 +243,47 @@ select * from tarea;
 end if;
 end //
 
+delimiter //
+create procedure tareaTarea ()
+begin
+select t.id_tarea1 as Tarea , t.id_tarea2 as Tarea_Siguiente from Tarea_Tarea t;
+end //
+
+delimiter //
+create procedure tareaParticipante ()
+begin
+select tp.id_tarea as Tarea, tp.id_participante as Participante from Tarea_Participante tp;
+end //
+
 /* --------------Procesos de actualizacion de registros--------------------------------------------------------------- */
 
 delimiter //
 create procedure proyectoActualizacion (in _id int, in _nombre varchar(40), in _objetivo varchar(60), in _fecha_inicio date,
 										in _fecha_fin date, in _descripcion text(120), in _responsable int)
 begin
-update tarea set nombre = _nombre, objetivo = _objetivo, fecha_inicio = _fecha_inicio, fecha_fin = _fecha_fin, 
+update proyecto set nombre = _nombre, objetivo = _objetivo, fecha_inicio = _fecha_inicio, fecha_fin = _fecha_fin, 
 				descripcion = _descripcion, responsable = _responsable where id = _id;
 end //
 
 delimiter //
 create procedure tareaActualizacion (in _id int, in _nombre varchar(40), in _fecha_inicio date, in _fecha_fin date, 
 									in _estado set("Pendiente", "En Proceso", "Terminada", "Cancelada"), 
-                                    in _prioridad set("Baja", "Normal", "Alta", "Urgente"), in _descripcion text(120))
+                                    in _prioridad set("Baja", "Normal", "Alta", "Urgente"), in _descripcion text(120),
+                                    in _id_proyecto int)
 begin
 update tarea set nombre = _nombre, fecha_inicio = _fecha_inicio, fecha_fin = _fecha_fin, estado = _estado, 
-							prioridad = _prioridad, descripcion = _descripcion where id = _id;
+							prioridad = _prioridad, descripcion = _descripcion, id_proyecto=_id_proyecto where id = _id;
+end //
+
+delimiter //
+create procedure participanteActualizacion (in _id int, in _nombre varchar(40), in _apellidoP varchar(20), in _apellidoM varchar(20), in _usuario varchar(20), in _cargo set("Participante", "Administrador de Proyecto", "Administrador General"))
+begin
+update mysql.user set user = _usuario where user = (select usuario from participante where id = _id);
+update Participante 
+set nombre = _nombre, apellidoP = _apellidoP, apellidoM = _apellidoM, usuario = _usuario, cargo = _cargo 
+where id = _id;
+call revocarPermisos(_usuario);
+call permisos(_usuario, _cargo);
 end //
 
 /* --------------Procesos de borrado de registros--------------------------------------------------------------- */
@@ -265,6 +298,28 @@ delimiter //
 create procedure proyectoBorrar (in _id int)
 begin
 delete from proyecto where id = _id;
+end //
+
+delimiter //
+create procedure participanteBorrar (in _id int)
+begin
+set @consulta = concat('drop user "',(select usuario from participante where id = _id),'"@"%"');
+prepare _borrarUsuario from @consulta;
+execute _borrarUsuario;
+deallocate prepare _borrarUsuario;
+delete from participante where id = _id;
+end //
+
+delimiter //
+create procedure tareaTareaBorrar (in _idT1 int, in _idT2 int)
+begin
+delete from Tarea_Tarea t where t.id_tarea1 = _idT1 and t.id_tarea2 = _idT2;
+end //
+
+delimiter //
+create procedure tareaParticipanteBorrar (in _idT int, in _idP int)
+begin
+delete from Tarea_Participante tp where tp.id_tarea = _idT and tp.id_participante = _idP;
 end //
 
 /*
@@ -772,4 +827,3 @@ insert into Tarea_Tarea (id_tarea1, id_tarea2) values (92, 100);
 insert into Tarea_Tarea (id_tarea1, id_tarea2) values (94, 100);
 insert into Tarea_Tarea (id_tarea1, id_tarea2) values (99, 100);
 insert into Tarea_Tarea (id_tarea1, id_tarea2) values (93, 100);
-*/

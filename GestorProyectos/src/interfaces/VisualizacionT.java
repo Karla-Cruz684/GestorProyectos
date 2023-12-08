@@ -4,13 +4,15 @@
  */
 package interfaces;
 
+import Placeholder.TextPrompt;
 import codigos.CRUD;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -21,12 +23,17 @@ public class VisualizacionT extends javax.swing.JFrame {
     private final CRUD c;
     private final String id;
     private final int type;
+    private final TableRowSorter<TableModel> sorterPar;
+    private int index;
 
     /**
      * Creates new form VisualizacionT
      */
     public VisualizacionT(CRUD c, String id, int type) {
         initComponents();
+        TextPrompt prueba = new TextPrompt("Filtrar por nombre",txtFiltro);
+        sorterPar = new TableRowSorter<>(tblTareas.getModel());
+        tblTareas.setRowSorter(sorterPar);
         this.c = c;
         this.id = id;
         this.type = type;
@@ -51,9 +58,10 @@ public class VisualizacionT extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        txtFiltro = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
 
@@ -144,6 +152,15 @@ public class VisualizacionT extends javax.swing.JFrame {
             }
         });
 
+        txtFiltro.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
+        txtFiltro.setForeground(new java.awt.Color(51, 51, 51));
+        txtFiltro.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Filtrar:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook", 0, 14))); // NOI18N
+        txtFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFiltroKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -152,8 +169,11 @@ public class VisualizacionT extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 922, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(320, 320, 320)
@@ -171,8 +191,10 @@ public class VisualizacionT extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel1)
+                .addGap(5, 5, 5)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -258,6 +280,7 @@ public class VisualizacionT extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
+            index = 1;
             ArrayList<Object[]> tareas = c.tareas();
             ((DefaultTableModel) tblTareas.getModel()).setColumnIdentifiers(tareas.get(0));
             ((DefaultTableModel) tblTareas.getModel()).setNumRows(0);
@@ -270,6 +293,7 @@ public class VisualizacionT extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        index = 0;
         switch (type) {
             case 0:
                 try {
@@ -320,7 +344,14 @@ public class VisualizacionT extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void txtFiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyReleased
+        filtrar(sorterPar, txtFiltro.getText());
+    }//GEN-LAST:event_txtFiltroKeyReleased
 
+    private void filtrar(TableRowSorter<TableModel> sorter, String text) {
+        sorter.setRowFilter(RowFilter.regexFilter(text, index));
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -333,5 +364,6 @@ public class VisualizacionT extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblTareas;
+    private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables
 }

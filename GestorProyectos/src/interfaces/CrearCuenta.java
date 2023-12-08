@@ -1,12 +1,17 @@
 
 package interfaces;
 
+import Placeholder.TextPrompt;
 import codigos.CRUD;
 
 public class CrearCuenta extends javax.swing.JFrame {
 
     public CrearCuenta(CRUD c) {
         initComponents();
+        TextPrompt prueba = new TextPrompt("Ingrese su nombre",jTextField1);
+        TextPrompt prueba1 = new TextPrompt("Ingrese su apellido",jTextField2);
+        TextPrompt prueba2 = new TextPrompt("Ingrese su telefono",jTextField3);
+        TextPrompt prueba3 = new TextPrompt("Ingrese su correo electronico",jTextField4);
     }
 
     @SuppressWarnings("unchecked")
@@ -46,27 +51,23 @@ public class CrearCuenta extends javax.swing.JFrame {
         jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jTextField1.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField1.setText("Ingrese su nombre");
+        jTextField1.setForeground(new java.awt.Color(51, 51, 51));
         jTextField1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nombre:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook", 0, 14))); // NOI18N
 
         jTextField2.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField2.setText("Ingrese su apellido");
+        jTextField2.setForeground(new java.awt.Color(51, 51, 51));
         jTextField2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Apellidos:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook", 0, 14))); // NOI18N
 
         jTextField3.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        jTextField3.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField3.setText("Ingrese su telefono");
+        jTextField3.setForeground(new java.awt.Color(51, 51, 51));
         jTextField3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Telefono:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook", 0, 14))); // NOI18N
 
         jTextField4.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        jTextField4.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField4.setText("Ingrese su correo electronico");
+        jTextField4.setForeground(new java.awt.Color(51, 51, 51));
         jTextField4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Correo electronico:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook", 0, 12))); // NOI18N
 
         jComboBox1.setFont(new java.awt.Font("Century Schoolbook", 0, 12)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(204, 204, 204));
+        jComboBox1.setForeground(new java.awt.Color(51, 51, 51));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mexico", "Estados Unidos", " " }));
         jComboBox1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pais:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook", 0, 14))); // NOI18N
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {

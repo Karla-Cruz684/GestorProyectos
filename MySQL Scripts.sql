@@ -7,8 +7,8 @@ use GestorProyectos;
 create table Participante(
 	id 			int primary key auto_increment,
 	nombre 		varchar(40) not null,
+    apellidoP 	varchar(20) not null,
     apellidoM	varchar(20) not null,
-    apellidoP 	varchar(20) not null, 
     usuario		varchar(20) unique not null,
     cargo 		set("Participante", "Administrador de Proyecto", "Administrador General") not null
 );
@@ -55,6 +55,70 @@ create table Tarea_Tarea(
     foreign key (id_tarea1) references Tarea(id) on delete cascade,
     foreign key (id_tarea2) references Tarea(id) on delete cascade
 );
+
+drop trigger if exists verificadorFechaT;
+drop trigger if exists verificadorFechaP;
+drop trigger if exists verificadorFechaTonU;
+drop trigger if exists verificadorFechaPonU;
+drop procedure if exists darPermiso;
+drop procedure if exists revocarPermisos;
+drop procedure if exists permisos;
+drop procedure if exists altaParticipante;
+drop procedure if exists altaProyecto;
+drop procedure if exists altaTarea;
+drop procedure if exists asignarTarea;
+drop procedure if exists asignarPrecedenciaTarea;
+drop procedure if exists participantes;
+drop procedure if exists proyectos;
+drop procedure if exists tareas;
+drop procedure if exists tareaTarea;
+drop procedure if exists tareaParticipante;
+drop procedure if exists proyectoActualizacion;
+drop procedure if exists tareaActualizacion;
+drop procedure if exists participanteActualizacion;
+drop procedure if exists tareaBorrar;
+drop procedure if exists proyectoBorrar;
+drop procedure if exists participanteBorrar;
+drop procedure if exists tareaTareaBorrar;
+drop procedure if exists tareaParticipanteBorrar;
+
+/* --------------Disparadores--------------------------------------------------------------- */
+
+delimiter //
+create trigger verificadorFechaT before insert on tarea for each row
+begin
+if new.fecha_inicio >= new.fecha_fin
+then
+signal sqlstate '45000';
+end if;
+end //
+
+delimiter //
+create trigger verificadorFechaP before insert on proyecto for each row
+begin
+if new.fecha_inicio >= new.fecha_fin
+then
+signal sqlstate '45000';
+end if;
+end //
+
+delimiter //
+create trigger verificadorFechaTonU before update on tarea for each row
+begin
+if new.fecha_inicio >= new.fecha_fin
+then
+signal sqlstate '45000';
+end if;
+end //
+
+delimiter //
+create trigger verificadorFechaPonU before update on proyecto for each row
+begin
+if new.fecha_inicio >= new.fecha_fin
+then
+signal sqlstate '45000';
+end if;
+end //
 
 /* --------------Procesos de permisos--------------------------------------------------------------- */
 
@@ -153,7 +217,7 @@ end //
 delimiter //
 create procedure asignarPrecedenciaTarea (in _id_tarea1 int, in _id_tarea2 int)
 begin
-insert into Tarea_Tarea (id_tarea1, _id_tarea2) 
+insert into Tarea_Tarea (id_tarea1, id_tarea2) 
 values (_id_tarea1, _id_tarea2);
 end //
 
@@ -246,13 +310,17 @@ end //
 delimiter //
 create procedure tareaTarea ()
 begin
-select t.id_tarea1 as Tarea , t.id_tarea2 as Tarea_Siguiente from Tarea_Tarea t;
+select t1.nombre as Tarea , t2.nombre as "Tarea Siguiente" from Tarea_Tarea t
+inner join tarea t1 on t.id_tarea1 = t1.id
+inner join tarea t2 on t.id_tarea2 = t2.id;
 end //
 
 delimiter //
 create procedure tareaParticipante ()
 begin
-select tp.id_tarea as Tarea, tp.id_participante as Participante from Tarea_Participante tp;
+select t.nombre as Tarea, p.nombre as Participante from Tarea_Participante tp
+inner join tarea t on tp.id_tarea = t.id
+inner join participante p on tp.id_participante = p.id;
 end //
 
 /* --------------Procesos de actualizacion de registros--------------------------------------------------------------- */

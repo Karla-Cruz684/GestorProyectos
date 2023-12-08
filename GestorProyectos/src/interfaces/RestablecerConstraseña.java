@@ -1,10 +1,13 @@
 
 package interfaces;
 
+import Placeholder.TextPrompt;
+
 public class RestablecerConstraseña extends javax.swing.JFrame {
 
     public RestablecerConstraseña() {
         initComponents();
+        TextPrompt prueba1 = new TextPrompt("Introduzca su correo electronico",jTextField2);
     }
 
    
@@ -32,8 +35,7 @@ public class RestablecerConstraseña extends javax.swing.JFrame {
         jLabel1.setText("Restablecer contraseña");
 
         jTextField2.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField2.setText("Introduzca su correo electronico");
+        jTextField2.setForeground(new java.awt.Color(51, 51, 51));
         jTextField2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Correo electronico:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook", 0, 14))); // NOI18N
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

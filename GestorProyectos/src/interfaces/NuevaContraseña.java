@@ -1,9 +1,13 @@
 package interfaces;
 
+import Placeholder.TextPrompt;
+
 public class NuevaContraseña extends javax.swing.JFrame {
 
     public NuevaContraseña() {
         initComponents();
+        TextPrompt prueba = new TextPrompt("Contraseña",jTextField1);
+        TextPrompt prueba1 = new TextPrompt("Contraseña",jTextField2);
     }
 
    
@@ -47,8 +51,7 @@ public class NuevaContraseña extends javax.swing.JFrame {
         jLabel1.setText("Restablecer contraseña");
 
         jTextField1.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField1.setText("Contraseña");
+        jTextField1.setForeground(new java.awt.Color(51, 51, 51));
         jTextField1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nueva contraseña:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook", 0, 14))); // NOI18N
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -57,8 +60,7 @@ public class NuevaContraseña extends javax.swing.JFrame {
         });
 
         jTextField2.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField2.setText("Contraseña");
+        jTextField2.setForeground(new java.awt.Color(51, 51, 51));
         jTextField2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Confirmar contraseña:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook", 0, 14))); // NOI18N
 
         jButton1.setBackground(new java.awt.Color(255, 204, 102));

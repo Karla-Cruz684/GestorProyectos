@@ -4,6 +4,7 @@
  */
 package interfaces;
 
+import Placeholder.TextPrompt;
 import codigos.CRUD;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -21,6 +22,10 @@ public class Participante extends javax.swing.JFrame {
      */
     public Participante(CRUD c) {
         initComponents();
+        TextPrompt prueba = new TextPrompt("Ingrese nombre del participante",txtNombre);
+        TextPrompt prueba1 = new TextPrompt("Ingrese apellido paterno del participante",txtApellidoP);
+        TextPrompt prueba2 = new TextPrompt("Ingrese apellido materno del participante",txtApellidoM);
+        TextPrompt prueba3 = new TextPrompt("Ingrese usuario del participante",txtUsuario);
         this.c = c;
     }
 
@@ -45,7 +50,7 @@ public class Participante extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
 
@@ -55,8 +60,7 @@ public class Participante extends javax.swing.JFrame {
         jLabel2.setText("Añada participantes a su proyecto");
 
         txtNombre.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        txtNombre.setForeground(new java.awt.Color(204, 204, 204));
-        txtNombre.setText("Ingrese nombre del participante");
+        txtNombre.setForeground(new java.awt.Color(51, 51, 51));
         txtNombre.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nombre:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook", 0, 14))); // NOI18N
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,22 +69,19 @@ public class Participante extends javax.swing.JFrame {
         });
 
         txtApellidoM.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        txtApellidoM.setForeground(new java.awt.Color(204, 204, 204));
-        txtApellidoM.setText("Ingrese apellido materno del participante");
+        txtApellidoM.setForeground(new java.awt.Color(51, 51, 51));
         txtApellidoM.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Apellido materno:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook", 0, 14))); // NOI18N
 
         txtApellidoP.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        txtApellidoP.setForeground(new java.awt.Color(204, 204, 204));
-        txtApellidoP.setText("Ingrese apellido paterno del participante");
+        txtApellidoP.setForeground(new java.awt.Color(51, 51, 51));
         txtApellidoP.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Apellido paterno:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook", 0, 14))); // NOI18N
 
         txtUsuario.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        txtUsuario.setForeground(new java.awt.Color(204, 204, 204));
-        txtUsuario.setText("Ingrese usuario del participante");
+        txtUsuario.setForeground(new java.awt.Color(51, 51, 51));
         txtUsuario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Usuario:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook", 0, 14))); // NOI18N
 
         boxCargo.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        boxCargo.setForeground(new java.awt.Color(204, 204, 204));
+        boxCargo.setForeground(new java.awt.Color(51, 51, 51));
         boxCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Participante", "Administrador de proyecto", "Administrador general" }));
         boxCargo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cargo:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook", 0, 14))); // NOI18N
 

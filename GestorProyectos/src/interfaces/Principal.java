@@ -1,6 +1,7 @@
 
 package interfaces;
 
+import Placeholder.TextPrompt;
 import codigos.CRUD;
 import codigos.Conexion;
 import java.sql.SQLException;
@@ -12,6 +13,8 @@ public class Principal extends javax.swing.JFrame {
     
     public Principal() {
         initComponents();
+        TextPrompt prueba = new TextPrompt("Introduzca usuario",txtUsuario);
+        TextPrompt prueba1 = new TextPrompt("Introduzca contraseña",txtPassword);
     }
     
     @SuppressWarnings("unchecked")
@@ -42,13 +45,21 @@ public class Principal extends javax.swing.JFrame {
         jLabel1.setText("BIENVENIDO");
 
         txtUsuario.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        txtUsuario.setForeground(new java.awt.Color(204, 204, 204));
-        txtUsuario.setText("Introduzca usuario");
+        txtUsuario.setForeground(new java.awt.Color(51, 51, 51));
         txtUsuario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Usuario", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Century Schoolbook", 0, 14))); // NOI18N
+        txtUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsuarioActionPerformed(evt);
+            }
+        });
 
-        txtPassword.setForeground(new java.awt.Color(204, 204, 204));
-        txtPassword.setText("Introduzca contraseña");
+        txtPassword.setForeground(new java.awt.Color(51, 51, 51));
         txtPassword.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contraseña", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook", 0, 14))); // NOI18N
+        txtPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordActionPerformed(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(255, 204, 102));
         jButton1.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
@@ -166,15 +177,23 @@ public class Principal extends javax.swing.JFrame {
         try {
             c.iniciar();
             if(c.isConectado()){
-                JOptionPane.showMessageDialog(this, "Inicio de sescion valido");
+                JOptionPane.showMessageDialog(this, "Inicio de sesión válido");
                 Visualizacion v = new Visualizacion(new CRUD(c));
                 v.setVisible(true);
                 this.dispose();
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Inicio de sescion invalido");
+            JOptionPane.showMessageDialog(this, "Inicio de sesión inválido");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsuarioActionPerformed
+
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPasswordActionPerformed
 
 
     public static void main(String args[]) {

@@ -4,6 +4,7 @@
  */
 package interfaces;
 
+import Placeholder.TextPrompt;
 import codigos.CRUD;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -21,6 +22,11 @@ public class Tarea extends javax.swing.JFrame {
      */
     public Tarea(CRUD c) {
         initComponents();
+        TextPrompt prueba1 = new TextPrompt("Ingrese nombre de la tarea",txtNombre);
+        TextPrompt prueba2 = new TextPrompt("Ingrese fecha de inicio de la tarea",txtFechaInicio);
+        TextPrompt prueba3 = new TextPrompt("Ingrese fecha de finalizacion de la tarea",txtFechaFinal);
+        TextPrompt prueba4 = new TextPrompt("Ingrese el id del proyecto al que pertenece",txtProyecto);     
+        TextPrompt prueba5 = new TextPrompt("Ingrese la descripcion de la tarea:",txtDescripcion);  
         this.c = c;
     }
 
@@ -49,8 +55,11 @@ public class Tarea extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         txtProyecto = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
 
@@ -97,37 +106,32 @@ public class Tarea extends javax.swing.JFrame {
         jLabel4.setText("Nueva tarea");
 
         txtNombre.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        txtNombre.setForeground(new java.awt.Color(204, 204, 204));
-        txtNombre.setText("Ingrese nombre de la tarea");
+        txtNombre.setForeground(new java.awt.Color(51, 51, 51));
         txtNombre.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nombre:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook", 0, 14))); // NOI18N
 
         txtFechaInicio.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        txtFechaInicio.setForeground(new java.awt.Color(204, 204, 204));
-        txtFechaInicio.setText("Ingrese fecha de inicio de la tarea");
+        txtFechaInicio.setForeground(new java.awt.Color(51, 51, 51));
         txtFechaInicio.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fecha de inicio:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook", 0, 14))); // NOI18N
 
         txtFechaFinal.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        txtFechaFinal.setForeground(new java.awt.Color(204, 204, 204));
-        txtFechaFinal.setText("Ingrese fecha de finalizacion de la tarea");
+        txtFechaFinal.setForeground(new java.awt.Color(51, 51, 51));
         txtFechaFinal.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fecha de finalizacion:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook", 0, 14))); // NOI18N
 
         boxEstado.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        boxEstado.setForeground(new java.awt.Color(204, 204, 204));
+        boxEstado.setForeground(new java.awt.Color(51, 51, 51));
         boxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pendiente", "En proceso", "Terminada", "Canelada" }));
         boxEstado.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Estado:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook", 0, 14))); // NOI18N
         boxEstado.setName(""); // NOI18N
-        boxEstado.setOpaque(true);
 
         boxPrioridad.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        boxPrioridad.setForeground(new java.awt.Color(204, 204, 204));
+        boxPrioridad.setForeground(new java.awt.Color(51, 51, 51));
         boxPrioridad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Baja", "Normal", "Urgente" }));
         boxPrioridad.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Prioridad:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook", 0, 14))); // NOI18N
 
         txtDescripcion.setColumns(20);
         txtDescripcion.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        txtDescripcion.setForeground(new java.awt.Color(204, 204, 204));
+        txtDescripcion.setForeground(new java.awt.Color(51, 51, 51));
         txtDescripcion.setRows(5);
-        txtDescripcion.setText("Ingrese la descripcion de la tarea:");
         txtDescripcion.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Descripcion:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook", 0, 14))); // NOI18N
         jScrollPane1.setViewportView(txtDescripcion);
 
@@ -152,9 +156,38 @@ public class Tarea extends javax.swing.JFrame {
         });
 
         txtProyecto.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        txtProyecto.setForeground(new java.awt.Color(204, 204, 204));
-        txtProyecto.setText("Ingrese el id del proyecto al que pertenece");
+        txtProyecto.setForeground(new java.awt.Color(51, 51, 51));
         txtProyecto.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Proyecto:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook", 0, 14))); // NOI18N
+
+        jButton4.setBackground(new java.awt.Color(255, 204, 102));
+        jButton4.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
+        jButton4.setText("...");
+        jButton4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setBackground(new java.awt.Color(255, 204, 102));
+        jButton5.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
+        jButton5.setText("...");
+        jButton5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setBackground(new java.awt.Color(255, 204, 102));
+        jButton6.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
+        jButton6.setText("...");
+        jButton6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -168,8 +201,6 @@ public class Tarea extends javax.swing.JFrame {
                 .addContainerGap(17, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1)
-                    .addComponent(txtFechaFinal)
-                    .addComponent(txtFechaInicio)
                     .addComponent(txtNombre)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,22 +210,38 @@ public class Tarea extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(txtProyecto))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtProyecto, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtFechaFinal, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtFechaInicio, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addComponent(jLabel4)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton5))
+                        .addGap(18, 18, 18)
+                        .addComponent(txtFechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton4))
                 .addGap(18, 18, 18)
-                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtFechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton6))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -234,11 +281,27 @@ public class Tarea extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            c.altaTarea(txtNombre.getText(), txtFechaInicio.getText(), txtFechaFinal.getText(), boxEstado.getSelectedItem().toString(), boxPrioridad.getSelectedItem().toString(), txtDescripcion.getText(), txtProyecto.getText());
+            String r = c.altaTarea(txtNombre.getText(), txtFechaInicio.getText(), txtFechaFinal.getText(), boxEstado.getSelectedItem().toString(), boxPrioridad.getSelectedItem().toString(), txtDescripcion.getText(), txtProyecto.getText());
+            JOptionPane.showMessageDialog(this, r);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        JCalendar c = new JCalendar(this, true, txtFechaFinal);
+        c.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        JCalendar c = new JCalendar(this, true, txtFechaInicio);
+        c.setVisible(true);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        VisualizacionP v = new VisualizacionP(c, txtProyecto);
+        v.setVisible(true);
+    }//GEN-LAST:event_jButton6ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -246,6 +309,9 @@ public class Tarea extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> boxPrioridad;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

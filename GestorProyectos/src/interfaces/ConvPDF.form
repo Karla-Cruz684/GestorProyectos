@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+      <Color blue="ff" green="99" red="cc" type="rgb"/>
+    </Property>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="jPanel1">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="99" red="cc" type="rgb"/>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="320" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jScrollPane2" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="1" pref="548" max="32767" attributes="0"/>
+                      <Component id="jtxtdir" alignment="1" max="32767" attributes="0"/>
+                      <Component id="jtxtdir2" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jButton1" max="32767" attributes="0"/>
+                              <Component id="jButton2" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Component id="jButton4" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+              </Group>
+              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace pref="620" max="32767" attributes="0"/>
+                      <Component id="jButton5" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtxtdir" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" min="-2" pref="243" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtxtdir2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jScrollPane2" min="-2" pref="255" max="-2" attributes="0"/>
+                      <Component id="jButton4" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="49" max="32767" attributes="0"/>
+              </Group>
+              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace pref="653" max="32767" attributes="0"/>
+                      <Component id="jButton5" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Bahnschrift" size="18" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="A.K.L.K"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Direccion"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jtxtdir">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTextArea" name="jtxacont">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="columns" type="int" value="20"/>
+                <Property name="rows" type="int" value="5"/>
+                <Property name="text" type="java.lang.String" value="-----------------------------| MANUAL DE AYUDA USUARIO |-----------------------------&#xa;&#xa;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; | Para iniciar sesi&#xf3;n o crear cuenta | &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&#xa;Se mostrar&#xe1; la pantalla principal del sistema. Se pedir&#xe1; iniciar sesi&#xf3;n en caso de tener una cuenta ya creada. Se ingresa el usuario y contrase&#xf1;a, y posteriormente, se mostrar&#xe1; un mensaje de validaci&#xf3;n de la cuenta en la pantalla.&#xa;&#xa;En caso de ser un administrador, para consultar todos los proyectos se dar&#xe1; click en el bot&#xf3;n &quot;Consultar&quot;, lo mismo si se quiere consultar las tareas y participantes, s&#xf3;lo se deber&#xe1; colocar en la pesta&#xf1;a correspondiente. Por otra parte, para agregar alg&#xfa;n proyecto, tarea o participante se le dar&#xe1; click en &quot;Agregar&quot;. Si ya no se requiere hacer ninguna acci&#xf3;n se dar&#xe1; click en el bot&#xf3;n de &quot;Atr&#xe1;s&quot;, el cual lo regresar&#xe1; a la pantalla principal.&#xa;&#xa;De caso contrario (si no se tiene una cuenta), darle click al bot&#xf3;n de &quot;Crear cuenta&quot;. Se llenar&#xe1;n los datos correspondientes de Nombre, Apellidos, Tel&#xe9;fono, Correo electr&#xf3;nico y pa&#xed;s. Al dar &quot;Aceptar&quot; ya tendr&#xe1; una cuenta dentro del sistema y podr&#xe1; iniciar sesi&#xf3;n.&#xa;&#xa;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; | Para agregar participantes | &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&#xa;&#xa;Antes de haber creado un proyecto posicionarse en la pesta&#xf1;a de &quot;Participante&quot;, posteriormente llenar campos y dar click en &quot;Agregar&quot;. Para ver el participante creado dar click en la pesta&#xf1;a de &quot;Participante&quot; en &quot;Consultar&quot;.&#xa;&#xa;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; | Para crear un proyecto | &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&#xa;&#xa;Despu&#xe9;s de haber iniciado sesi&#xf3;n con la cuenta de usuario posicionarse en la pesta&#xf1;a de &quot;Proyecto&quot; en el bot&#xf3;n de &quot;Agregar&quot;, posteriormente llenar campos de Nombre, responsable, etc. Dar click en &quot;Aceptar&quot; y para ver el nuevo proyecto creado dar click en la pesta&#xf1;a de &quot;Proyecto&quot; en &quot;Consultar&quot;.&#xa;&#xa;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; | Para crear una tarea | &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&#xa;&#xa;Despu&#xe9;s de haber creado un proyecto posicionarse en la pesta&#xf1;a de &quot;Tarea&quot;, posteriormente llenar campos de nombre de la tarea y dar click en &quot;Agregar&quot;. Para ver la tarea creada dar click en la pesta&#xf1;a de &quot;Tarea&quot; en &quot;Consultar&quot;.&#xa;&#xa;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; | Para problemas t&#xe9;cnicos | &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&#xa;&#xa;Favor de reportarse al correo AkLk700@gmail.com&#xa;o al n&#xfa;mero telef&#xf3;nico 833 704 2365"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JButton" name="jButton2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Generar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Direccion"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jtxtdir2">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTextArea" name="jtxacont2">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="columns" type="int" value="20"/>
+                <Property name="rows" type="int" value="5"/>
+                <Property name="text" type="java.lang.String" value="-----------------------------| MANUAL T&#xc9;CNICO |-----------------------------&#xa;                               &#xa;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; | &#xbf;Qu&#xe9; hace el sistema? | &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&#xa;&#xa;El sistema gestor de desarrollo de proyectos de software &quot;A.K.L.K&quot; fue dise&#xf1;ado para permitir la creaci&#xf3;n de proyectos, los cuales pueden ser consultados permitiendo ver su nombre, el responsable de dicho proyecto, las tareas pendientes pertenecientes a dicho proyecto, los participantes asignados, as&#xed; como la fecha de inicio y de fin. Adem&#xe1;s, permitir&#xe1; agregar nuevos proyectos, asignando un nombre, objetivo, las fechas de inicio y fin, as&#xed; como una breve descripci&#xf3;n del mismo y asignar a su responsable.&#xa;&#xa;Por otra parte, permitir&#xe1; agregar tareas con sus respectivos nombres, fechas de inicio y de fin, el proyecto al que pertenece, breve descripciones, el estado (pendiente, en proceso, terminada, cancelada) y su prioridad (Baja, normal, urgente). Se permitir&#xe1; su consulta.&#xa;&#xa;En cuanto a los participantes, se les permitir&#xe1; agregar m&#xe1;s pidiendo su nombre, apellido paterno y materno, as&#xed; como su usuario y el cargo que ocupar&#xe1; (participante, administrador del proyecto, administrador general). Se permitir&#xe1; su consulta.&#xa;&#xa;&#xa;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; | Desarrollo | &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&#xa;&#xa;Para elaborar este sistema partimos del diagrama de E-R del sistema, as&#xed; como varios diagramas de clases y actividades que estuvimos realizando en clase. Conforme ibamos avanzando ibamos modificando detalles del proyecto y de los requisitos que no fueran primordiales, as&#xed; como tambi&#xe9;n fuimos variando el dise&#xf1;o de las interfaces conforme pasabamos a la programaci&#xf3;n, ya que al momento de hacerla iban surgiendo m&#xe1;s clases o ventanas que &#xed;bamos a ocupar para realizar ciertas acciones y que as&#xed; el programa fuera m&#xe1;s funcional.&#xa;&#xa;Mientras una persona del equipo se encargaba de ir avanzando con la programaci&#xf3;n las otras iban realizando las actividades y las interfaces, as&#xed; el dise&#xf1;o del logo.&#xa;En horas libres ve&#xed;amos en conjunto el programa y proporcionabamos ideas entre todos para ver c&#xf3;mo ir&#xed;a quedando. Adem&#xe1;s de ir corrigiendo la base de datos e ir haciendo pruebas para ver qu&#xe9; cambiabamos.&#xa;&#xa;En el programa existe una clase Conexion y CRUD dentro del paquete codigos, la primera sirviendo para la conexi&#xf3;n a la base de datos de MySQL Workbench, y la segunda para los create, read, update, y delete."/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JButton" name="jButton4">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Generar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton5">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Generar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>
